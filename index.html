@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusWave | Panel de Control</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/modo-claro.css">
+    <link rel="icon" href="img/icono.png">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>FocusWave</h1>
+            <p>Tu espacio académico de concentración</p>
+
+            <a href="ambientes.html" class="explorar">
+                Explorar ambientes
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ambientes.html">Ambientes</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="salas.html">Salas</a></li>
+            <li><a href="metodos.html">Métodos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+            <li><a href="registrarse.html">Registrarse</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor">
+
+        <section>
+
+            <h2 id="saludo-personalizado">Tu Panel de Control</h2>
+            <p id="reloj-vivo"
+                style="color: #94a3b8; margin-top: -15px; margin-bottom: 25px; font-size: 18px; font-weight: bold;"></p>
+            <div class="grid">
+                <article class="mini-card"
+                    style="border-left: 4px solid #38bdf8; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3>🎧 Entrar a una sala</h3>
+                        <p>Únete a un stream de estudio con otros compañeros y evita distracciones.</p>
+                    </div>
+                    <a href="salas.html"
+                        style="margin-top: 15px; text-decoration: none; color: #38bdf8; font-weight: bold;">Ver salas
+                        disponibles ➔</a>
+                </article>
+
+                <article class="mini-card"
+                    style="border-left: 4px solid #818cf8; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3>📚 Mis Cursos</h3>
+                        <p>Revisa tu horario de hoy y organiza los temas que necesitas repasar.</p>
+                    </div>
+                    <a href="cursos.html"
+                        style="margin-top: 15px; text-decoration: none; color: #818cf8; font-weight: bold;">Ir a mis
+                        cursos ➔</a>
+                </article>
+
+                <article class="mini-card"
+                    style="border-left: 4px solid #4ade80; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3>🍅 Técnicas de Estudio</h3>
+                        <p>Aplica Pomodoro o Active Recall para maximizar tu retención de información.</p>
+                    </div>
+                    <a href="metodos.html"
+                        style="margin-top: 15px; text-decoration: none; color: #4ade80; font-weight: bold;">Elegir un
+                        método ➔</a>
+                </article>
+
+                <article class="mini-card"
+                    style="border-left: 4px solid #f472b6; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3>🌌 Ambientes Solo</h3>
+                        <p>Si prefieres estudiar solo, elige un fondo relajante y música lo-fi.</p>
+                    </div>
+                    <a href="ambientes.html"
+                        style="margin-top: 15px; text-decoration: none; color: #f472b6; font-weight: bold;">Explorar
+                        ambientes ➔</a>
+                </article>
+            </div>
+
+            <div class="bloque">
+                <h2>Mi Rendimiento Semanal</h2>
+                <div class="grid">
+                    <article class="mini-card">
+                        <h3 style="color: #38bdf8; font-size: 32px; margin-bottom: 5px;">14h 30m</h3>
+                        <p>Horas de concentración</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3 style="color: #4ade80; font-size: 32px; margin-bottom: 5px;">5 Días</h3>
+                        <p>Racha de estudio 🔥</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="bloque">
+                <h2>Salas populares ahora</h2>
+                <div class="grid">
+                    <article class="mini-card">
+                        <h3>💻 Programming Room</h3>
+                        <p>18 estudiantes conectados.</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3>📖 Silent Library</h3>
+                        <p>12 estudiantes estudiando.</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3>🌧️ Rain Study</h3>
+                        <p>24 estudiantes concentrándose.</p>
+                    </article>
+
+                    <article class="mini-card">
+                        <h3>🌌 Night Focus</h3>
+                        <p>9 estudiantes activos.</p>
+                    </article>
+                </div>
+            </div>
+
+        </section>
+
+        <aside>
+
+            <div class="panel">
+                <h2>Progreso diario</h2>
+                <div class="barra">
+                    <div id="barra-progreso" class="progreso" style="width: 0%; transition: width 0.4s ease;"></div>
+                </div>
+                <p id="texto-progreso">0 de 0 tareas completadas</p>
+            </div>
+
+            <div class="panel">
+                <h2>Tareas del día</h2>
+
+                <form id="form-tarea" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="nueva-tarea" placeholder="Escribe una tarea..." required
+                        style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
+                    <button type="submit" style="padding: 10px 15px; border-radius: 8px;">+</button>
+                </form>
+
+                <ul class="tareas" id="lista-tareas">
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2 id="titulo-horario-hoy">Mi Horario</h2>
+                <div id="horario-hoy-contenedor" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    </div>
+            </div>
+
+            <div class="panel">
+                <h2>Estado</h2>
+
+                <div class="estado-item activo">
+                    🔥 En concentración
+                </div>
+
+                <div class="estado-item musica">
+                    🎧 Lo-fi activo
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Motivación</h2>
+                <p>"La disciplina supera a la motivación."</p>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <h2>Sobre FocusWave</h2>
+            <p>
+                FocusWave es una plataforma diseñada para mejorar la concentración y productividad
+                de los estudiantes mediante ambientes virtuales y herramientas académicas.
+            </p>
+        </div>
+        <p>FocusWave © 2025</p>
+    </footer>
+    <script src="js/modo-claro.js"></script>
+    <script src="js/inicio.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

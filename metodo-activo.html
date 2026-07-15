@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Enfoque | FocusWave</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/modo-claro.css">
+    <link rel="icon" href="img/icono.png">
+</head>
+<body id="cuerpo-pagina" style="transition: background 1s ease;">
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="metodos.html">Volver a Métodos</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor" style="justify-content: center; align-items: center; min-height: 70vh; display: flex; flex-direction: column;">
+        
+        <h1 id="titulo-metodo" style="font-size: 40px; margin-bottom: 10px; color: #38bdf8;">Cargando...</h1>
+        <p id="instrucciones-metodo" style="color: #cbd5e1; max-width: 600px; text-align: center; margin-bottom: 30px; line-height: 1.6;"></p>
+
+        <div id="interfaz-reloj" class="panel" style="display: none; text-align: center; width: 100%; max-width: 500px; background: rgba(15,23,42,0.8);">
+            
+            <h2 id="fase-actual" style="color: #4ade80; font-size: 24px; margin-bottom: -10px;">Fase: </h2>
+            <div id="tiempo-pantalla" style="font-size: 80px; font-weight: bold; color: #e2e8f0; margin: 20px 0;">00:00</div>
+            
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="btn-iniciar" style="padding: 15px 30px; font-size: 18px;">Iniciar</button>
+                <button id="btn-pausar" style="padding: 15px 30px; font-size: 18px; background: #334155;">Pausar</button>
+            </div>
+        </div>
+
+        <div id="interfaz-flashcards" style="display: none; width: 100%; max-width: 600px; text-align: center;">
+            
+            <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <label style="color: #e2e8f0;">Estudiando ahora:</label>
+                <select id="filtro-curso" style="padding: 8px; border-radius: 5px; background: #1e293b; color: white; border: 1px solid #38bdf8;">
+                    <option value="Todos">Todos los cursos</option>
+                    <option value="Java">Programación Orientada a Objetos</option>
+                    <option value="Cálculo">Cálculo Integral</option>
+                    <option value="Física">Física</option>
+                </select>
+            </div>
+            
+            <div id="tarjeta" class="card" style="padding: 50px 40px; cursor: pointer; min-height: 200px; display: flex; align-items: center; justify-content: center; transition: 0.3s; border: 2px dashed #38bdf8; margin-bottom: 20px;">
+                <h3 id="texto-tarjeta" style="font-size: 22px;">Cargando tarjeta...</h3>
+            </div>
+
+            <button id="btn-siguiente" style="padding: 12px 25px; margin-bottom: 30px;">Siguiente Tarjeta ➔</button>
+
+            <div class="panel" style="text-align: left; background: rgba(15,23,42,0.6);">
+                <h3 style="margin-bottom: 15px; font-size: 18px;">Añadir nueva tarjeta</h3>
+                <form id="form-flashcard" style="display: flex; flex-direction: column; gap: 10px;">
+                    <select id="nuevo-curso" required style="padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
+                        <option value="" disabled selected>Selecciona el curso...</option>
+                        <option value="Java">Programación Orientada a Objetos</option>
+                        <option value="Cálculo">Cálculo Integral</option>
+                        <option value="Física">Física</option>
+                    </select>
+                    <input type="text" id="nueva-pregunta" placeholder="Pregunta (Ej: ¿Regla de Leibniz?)" required style="padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
+                    <input type="text" id="nueva-respuesta" placeholder="Respuesta" required style="padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
+                    <button type="submit" style="padding: 12px; border-radius: 8px;">Guardar Tarjeta</button>
+                </form>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/modo-claro.js"></script>
+    <script src="js/metodo-activo.js"></script>
+</body>
+</html>

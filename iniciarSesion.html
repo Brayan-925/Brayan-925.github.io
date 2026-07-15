@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | FocusWave</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/modo-claro.css">
+    <link rel="icon" href="img/icono.png">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header-login">
+
+        <div class="logo">
+            <h1>FocusWave</h1>
+
+            <p>Bienvenido nuevamente</p>
+        </div>
+
+    </header>
+
+    <!-- NAV -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ambientes.html">Ambientes</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="salas.html">Salas</a></li>
+            <li><a href="metodos.html">Métodos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+            <li><a href="registrarse.html">Registrarse</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- LOGIN -->
+    <main class="login-contenedor">
+
+        <div class="login-box">
+
+            <h2>Iniciar sesión</h2>
+
+            <p class="texto-login">
+                Accede a tu espacio académico y continúa concentrándote.
+            </p>
+
+            <form class="formulario" id="loginForm">
+
+                <label for="correo">Correo electrónico</label>
+
+                <input type="email" id="correo" placeholder="Ingresa tu correo" required>
+
+                <label for="password">Contraseña</label>
+
+                <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+
+                <button type="submit">
+                    Ingresar
+                </button>
+
+            </form>
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0; color: #94a3b8;">
+                <div style="flex: 1; height: 1px; background: #334155;"></div>
+                o continúa con
+                <div style="flex: 1; height: 1px; background: #334155;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+                <div id="g_id_onload"
+                    data-client_id="833654762050-urm1ua069e3cvl54pu9m00kfc585fadm.apps.googleusercontent.com"
+                    data-callback="manejarRespuestaGoogle">
+                </div>
+
+                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                    data-text="signin_with" data-shape="rectangular" data-logo_alignment="left">
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 12px;">
+                <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
+                    data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"
+                    onclick="checkLoginState();" style="cursor: pointer;">
+                    <button type="button"
+                        style="background: #1877F2; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold;">
+                        Continuar con Facebook
+                    </button>
+                </div>
+            </div>
+            <p class="registro">
+                ¿No tienes cuenta?
+
+                <a href="registrarse.html">
+                    Registrarse
+                </a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="sobre">
+
+            <h2>Sobre FocusWave</h2>
+
+            <p>
+                FocusWave es una plataforma diseñada para mejorar la concentración y productividad
+                de los estudiantes mediante ambientes virtuales y herramientas académicas.
+            </p>
+
+        </div>
+
+        <p>FocusWave © 2025</p>
+
+    </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v19.0&appId=2427685661085358&cookie=true">
+        </script>
+    <script src="js/modo-claro.js"></script>
+    <script src="js/google-login.js"></script>
+    <script src="js/facebook-login.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/inicio.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+
+</html>

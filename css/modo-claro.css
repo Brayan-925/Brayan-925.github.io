@@ -1,0 +1,207 @@
+/* ==========================================================
+   MODO CLARO - FocusWave
+   Se activa agregando la clase "modo-claro" al <body>
+   (esto lo hace automáticamente modo-claro.js)
+   ========================================================== */
+
+/* LIENZO BASE (evita que quede negro detrás/alrededor en navegadores en modo oscuro) */
+html{
+    color-scheme: dark;
+}
+
+html.modo-claro{
+    color-scheme: light !important;
+    background: #eef2f7 !important;
+}
+
+body.modo-claro{
+    min-height: 100vh;
+}
+
+/* FONDO GENERAL */
+body.modo-claro{
+    background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(129,140,248,0.12), transparent 25%),
+    linear-gradient(
+        135deg,
+        #f8fafc,
+        #eef2f7,
+        #e2e8f0
+    ) !important;
+
+    color: #0f172a !important;
+}
+
+/* HEADER */
+body.modo-claro header{
+    background:
+    linear-gradient(rgba(248,250,252,0.88), rgba(248,250,252,0.88)),
+    url("../img/fondo.jpg") !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+body.modo-claro .logo p{
+    color: #334155 !important;
+}
+
+/* NAV */
+body.modo-claro nav{
+    background: rgba(255,255,255,0.85) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .buscador input{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro nav a{
+    color: #1e293b !important;
+}
+
+body.modo-claro nav a:hover{
+    background-color: rgba(56,189,248,0.15);
+    color: #0284c7 !important;
+}
+
+/* TITULOS */
+body.modo-claro section h2,
+body.modo-claro .panel h2,
+body.modo-claro footer h2,
+body.modo-claro .pagina-ambientes h2,
+body.modo-claro .pagina-contacto h2,
+body.modo-claro .pagina-cursos h2,
+body.modo-claro .pagina-metodos h2,
+body.modo-claro .pagina-salas h2,
+body.modo-claro .login-box h2,
+body.modo-claro .registro-box h2{
+    color: #0f172a !important;
+}
+
+/* CARD GENERAL */
+body.modo-claro .card,
+body.modo-claro .mini-card,
+body.modo-claro .panel,
+body.modo-claro .formulario,
+body.modo-claro .info-card,
+body.modo-claro .formulario-contacto,
+body.modo-claro .curso-card,
+body.modo-claro .metodo-card,
+body.modo-claro .login-box,
+body.modo-claro .registro-box,
+body.modo-claro .sala-card,
+body.modo-claro .panel-vidrio{
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .card:hover{
+    box-shadow:
+    0px 15px 35px rgba(0,0,0,0.12),
+    0px 0px 20px rgba(56,189,248,0.2);
+}
+
+body.modo-claro .card p,
+body.modo-claro .info-card p,
+body.modo-claro .metodo-card p,
+body.modo-claro .curso-card p,
+body.modo-claro .contenido-sala p,
+body.modo-claro .texto-login,
+body.modo-claro .registro,
+body.modo-claro .texto-registro,
+body.modo-claro .login-link{
+    color: #475569 !important;
+}
+
+/* TEXTOS SECUNDARIOS */
+body.modo-claro .info-sala,
+body.modo-claro .datos span{
+    color: #64748b !important;
+}
+
+body.modo-claro .datos span{
+    background-color: rgba(0,0,0,0.05) !important;
+}
+
+/* INPUTS Y FORMULARIOS */
+body.modo-claro .formulario input,
+body.modo-claro .formulario-contacto input,
+body.modo-claro .formulario-contacto textarea,
+body.modo-claro #formCurso input,
+body.modo-claro #input-mensaje{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* FOOTER */
+body.modo-claro footer{
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+    border-top: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* BARRA DE PROGRESO Y HORARIO */
+body.modo-claro .barra{
+    background-color: rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .horario-item{
+    background-color: rgba(0,0,0,0.04) !important;
+}
+
+body.modo-claro .tareas label{
+    color: #334155 !important;
+}
+
+/* SALA EN VIVO - CHAT */
+body.modo-claro .mensaje{
+    background: rgba(0,0,0,0.04) !important;
+}
+
+body.modo-claro .mensaje span{
+    color: #334155 !important;
+}
+
+body.modo-claro #caja-mensajes::-webkit-scrollbar-track{
+    background: rgba(0,0,0,0.05) !important;
+}
+
+/* BOTÓN DE CAMBIO DE TEMA */
+#boton-modo-claro{
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 2000;
+
+    width: 52px;
+    height: 52px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+
+    color: white;
+    font-size: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0px 6px 18px rgba(56,189,248,0.4);
+
+    transition: 0.3s;
+}
+
+#boton-modo-claro:hover{
+    transform: translateY(-3px);
+}

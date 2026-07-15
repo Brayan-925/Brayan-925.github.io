@@ -1,0 +1,42 @@
+// ==========================================================
+// MODO CLARO - FocusWave
+// Crea automáticamente el botón flotante y recuerda la
+// preferencia del usuario usando localStorage.
+// ==========================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Crear el botón flotante
+    const boton = document.createElement("button");
+    boton.id = "boton-modo-claro";
+    boton.type = "button";
+    boton.title = "Cambiar tema";
+    document.body.appendChild(boton);
+
+    // Función para actualizar el ícono del botón
+    function actualizarIcono(){
+        boton.textContent = document.body.classList.contains("modo-claro") ? "🌙" : "☀️";
+    }
+
+    // Aplicar preferencia guardada al cargar la página
+    const temaGuardado = localStorage.getItem("focuswave-tema");
+
+    if(temaGuardado === "claro"){
+        document.body.classList.add("modo-claro");
+        document.documentElement.classList.add("modo-claro");
+    }
+
+    actualizarIcono();
+
+    // Evento de click para alternar el tema
+    boton.addEventListener("click", () => {
+        document.body.classList.toggle("modo-claro");
+        document.documentElement.classList.toggle("modo-claro");
+
+        const temaActual = document.body.classList.contains("modo-claro") ? "claro" : "oscuro";
+        localStorage.setItem("focuswave-tema", temaActual);
+
+        actualizarIcono();
+    });
+
+});

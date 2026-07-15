@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contacto | FocusWave</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/contacto.css">
+    <link rel="stylesheet" href="css/modo-claro.css">
+    <link rel="icon" href="img/icono.png">
+
+    <style>
+        .info-card,
+        .formulario-contacto {
+            background: rgba(30, 41, 59, 0.7) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-contacto">
+        <div class="logo">
+            <h1>Contacto</h1>
+            <p>Comunícate con el equipo de FocusWave</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ambientes.html">Ambientes</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="salas.html">Salas</a></li>
+            <li><a href="metodos.html">Métodos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+            <li><a href="registrarse.html">Registrarse</a></li>
+        </ul>
+    </nav>
+
+    <main class="pagina-contacto">
+
+        <section class="info-contacto">
+            <h2>Información de contacto</h2>
+
+            <div class="info-card">
+                <h3>📧 Correo</h3>
+                <p>focuswave@gmail.com</p>
+            </div>
+
+            <div class="info-card">
+                <h3>📱 Teléfono</h3>
+                <p>+51 961 147 209</p>
+            </div>
+
+            <div class="info-card">
+                <h3>📍 Ubicación</h3>
+                <p>Trujillo, Perú</p>
+            </div>
+
+            <div class="info-card">
+                <h3>🕒 Horario de atención</h3>
+                <p>Lunes a Viernes - 8:00 AM a 6:00 PM</p>
+            </div>
+        </section>
+
+        <section class="formulario-contacto">
+            <h2>Envíanos un mensaje</h2>
+
+            <form id="form-contacto">
+
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje..." required></textarea>
+
+                <button type="submit">Enviar mensaje</button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="sobre">
+            <h2>Sobre FocusWave</h2>
+            <p>
+                FocusWave es una plataforma académica enfocada en mejorar
+                la concentración, productividad y organización estudiantil.
+            </p>
+        </div>
+        <p>FocusWave © 2025</p>
+    </footer>
+    <script src="js/modo-claro.js"></script>
+    <script src="js/inicio.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // DOMContentLoaded asegura que el HTML cargó completo antes de buscar el formulario
+        document.addEventListener("DOMContentLoaded", function () {
+            const formContacto = document.getElementById("form-contacto");
+
+            if (formContacto) {
+                formContacto.addEventListener("submit", function (event) {
+                    // 1. Detenemos cualquier comportamiento por defecto del navegador
+                    event.preventDefault();
+
+                    // 2. Capturamos el botón y guardamos su texto
+                    const boton = formContacto.querySelector("button[type='submit']");
+                    const textoOriginal = boton.textContent;
+
+                    // 3. Efecto visual de carga
+                    boton.textContent = "Enviando... ⏳";
+                    boton.style.backgroundColor = "#fb923c"; // Color naranja
+                    boton.style.color = "#0f172a"; // Letra oscura
+
+                    // 4. Temporizador de 1.5 segundos
+                    setTimeout(() => {
+                        alert("¡Mensaje enviado con éxito al equipo de FocusWave!");
+
+                        // Limpiamos los inputs
+                        formContacto.reset();
+
+                        // Restauramos el botón a su estado original
+                        boton.textContent = textoOriginal;
+                        boton.style.backgroundColor = "";
+                        boton.style.color = "";
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

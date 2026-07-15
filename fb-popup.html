@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectando con Facebook | FocusWave</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a; /* Color oscuro alineado con el login de FocusWave */
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .contenedor-carga {
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border-left-color: #1877F2; /* Azul oficial de Facebook */
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-carga">
+        <div class="spinner"></div>
+        <h2>Conectando de forma segura con Facebook...</h2>
+        <p>Por favor, espera un momento.</p>
+    </div>
+
+    <script>
+        // Tu ID de aplicación de Facebook actual
+        const appId = "2427685661085358";
+        
+        // Construimos la URL de redirección oficial hacia la API de Facebook
+        const urlFacebook = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${appId}&redirect_uri=https://localhost/&response_type=token`;
+        
+        // Redireccionamos la pestaña emergente de inmediato a Facebook
+        setTimeout(() => {
+            window.location.href = urlFacebook;
+        }, 800); // 800ms de retraso por estética visual de carga
+    </script>
+
+</body>
+</html>
