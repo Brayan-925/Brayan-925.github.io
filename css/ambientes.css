@@ -28,8 +28,7 @@
     gap: 30px;
 }
 
-/* RESPONSIVE */
-
+/* RESPONSIVE - Pantalla principal */
 @media(max-width: 768px){
 
     .pagina-ambientes{
@@ -38,6 +37,95 @@
 
     .pagina-ambientes h2{
         font-size: 28px;
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE - Vista inmersiva (pantalla completa del ambiente)
+   ========================================================== */
+
+@media(max-width: 768px) {
+
+    /* El título del ambiente más pequeño */
+    #titulo-ambiente-activo {
+        font-size: 22px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Contenedor principal: cambiar a columna en móvil */
+    #contenedor-ambiente {
+        flex-direction: column !important;
+        width: 95% !important;
+        height: auto !important;
+        max-height: 85vh !important;
+        gap: 12px !important;
+        overflow-y: auto !important;
+    }
+
+    /* Video panel: altura fija en móvil */
+    #contenedor-ambiente > .panel-vidrio:first-child {
+        flex: none !important;
+        height: 180px !important;
+        min-height: 180px !important;
+    }
+
+    /* Panel lateral (reloj + notas) */
+    #panel-lateral-ambiente {
+        flex: none !important;
+        flex-direction: row !important;
+        gap: 12px !important;
+        min-height: 0 !important;
+    }
+
+    /* Reloj */
+    #panel-lateral-ambiente > .panel-vidrio:first-child {
+        flex: 1 !important;
+        padding: 15px !important;
+    }
+
+    #reloj-ambiente {
+        font-size: 28px !important;
+    }
+
+    /* Notas */
+    #panel-lateral-ambiente > .panel-vidrio:last-child {
+        flex: 2 !important;
+        padding: 15px !important;
+        min-height: 120px !important;
+    }
+
+    /* Botón de salir más pequeño */
+    #btn-salir-ambiente {
+        font-size: 13px !important;
+        padding: 8px 14px !important;
+        top: 10px !important;
+        right: 10px !important;
+    }
+
+}
+
+@media(max-width: 480px) {
+
+    #contenedor-ambiente > .panel-vidrio:first-child {
+        height: 140px !important;
+        min-height: 140px !important;
+    }
+
+    #panel-lateral-ambiente {
+        flex-direction: column !important;
+    }
+
+    #panel-lateral-ambiente > .panel-vidrio:last-child {
+        min-height: 100px !important;
+    }
+
+    #reloj-ambiente {
+        font-size: 24px !important;
+    }
+
+    #titulo-ambiente-activo {
+        font-size: 18px !important;
     }
 
 }

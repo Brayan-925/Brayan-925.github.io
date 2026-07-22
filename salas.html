@@ -1,49 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Salas | FocusWave</title>
-
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/salas.css">
     <link rel="stylesheet" href="css/modo-claro.css">
     <link rel="icon" href="img/icono.png">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body>
 
-    <!-- HEADER -->
     <header class="header-salas">
-
         <div class="logo">
-
             <h1>Salas de estudio</h1>
-
-            <p>
-                Únete a espacios virtuales para estudiar con otros estudiantes
-            </p>
-
+            <p>Únete a espacios virtuales para estudiar con otros estudiantes</p>
         </div>
-
     </header>
 
-    <!-- NAV -->
-    <nav>
-        <div class="flex items-center justify-between md:justify-center relative">
-
-            <!-- Botón hamburguesa: solo se ve en pantallas chicas -->
-            <button id="btn-menu" class="md:hidden text-2xl text-white bg-transparent border-none cursor-pointer">
-                ☰
-            </button>
-
-            <!-- Lista de enlaces -->
-            <ul id="menu-nav" class="hidden md:flex flex-col md:flex-row items-center gap-2 md:gap-5 list-none
-                   absolute md:static top-full left-0 w-full md:w-auto
-                   bg-slate-800 md:bg-transparent p-4 md:p-0">
+    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between md:justify-center">
+            <button id="btn-menu" class="md:hidden text-2xl text-slate-200 bg-transparent border-none cursor-pointer focus:outline-none p-1">☰</button>
+            <ul class="hidden md:flex items-center gap-5 list-none m-0 p-0">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="ambientes.html">Ambientes</a></li>
                 <li><a href="cursos.html">Cursos</a></li>
@@ -52,139 +31,117 @@
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
                 <li><a href="registrarse.html">Registrarse</a></li>
+                <li>
+                    <select id="selector-idioma" style="background:#1e293b;color:#38bdf8;border:1px solid rgba(56,189,248,0.3);padding:8px 12px;border-radius:8px;font-weight:bold;cursor:pointer;outline:none;">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                    </select>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <!-- MAIN -->
+    <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+    <aside id="menu-drawer" class="fixed top-0 left-0 h-full w-72 bg-slate-900 border-r border-slate-800 z-[60] -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-between p-5 shadow-2xl">
+        <div>
+            <div class="flex items-center justify-between pb-3 mb-5 border-b border-slate-800">
+                <span class="text-lg font-bold text-sky-400 tracking-wide">FocusWave</span>
+                <button id="btn-cerrar-drawer" class="text-base font-semibold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center border-none cursor-pointer transition-colors">✕</button>
+            </div>
+            <ul class="flex flex-col gap-2 list-none p-0 m-0">
+                <li><a href="index.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Inicio</a></li>
+                <li><a href="ambientes.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Ambientes</a></li>
+                <li><a href="cursos.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Cursos</a></li>
+                <li><a href="salas.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Salas</a></li>
+                <li><a href="metodos.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Métodos</a></li>
+                <li><a href="contacto.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Contacto</a></li>
+                <li><a href="iniciarSesion.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Iniciar sesión</a></li>
+                <li><a href="registrarse.html" class="block py-2 px-3 text-slate-200 hover:bg-slate-800 hover:text-sky-400 font-medium rounded-lg transition-colors">Registrarse</a></li>
+            </ul>
+        </div>
+        <div class="pt-4 border-t border-slate-800">
+            <label class="block text-xs text-slate-400 mb-2 font-medium">Idioma / Language</label>
+            <select id="selector-idioma-movil" style="width:100%;background:#1e293b;color:#38bdf8;border:1px solid rgba(56,189,248,0.3);padding:10px;border-radius:8px;font-weight:bold;cursor:pointer;outline:none;">
+                <option value="es">🇪🇸 Español</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="ja">🇯🇵 日本語</option>
+            </select>
+        </div>
+    </aside>
+
     <main class="pagina-salas">
-
         <h2>Salas activas</h2>
-
         <div class="salas-grid">
 
-            <!-- SALA -->
             <article class="sala-card">
-
                 <img src="img/programacion.jpg" alt="Programming Room">
-
                 <div class="contenido-sala">
-
                     <h3>💻 Programming Room</h3>
-
-                    <p>
-                        Sala enfocada en programación y desarrollo web.
-                    </p>
-
+                    <p>Sala enfocada en programación y desarrollo web.</p>
                     <div class="info-sala">
                         <span>👥 18 estudiantes</span>
                         <span>🎧 Lo-fi</span>
                     </div>
-
                     <button>Unirse</button>
-
                 </div>
-
             </article>
 
-            <!-- SALA -->
             <article class="sala-card">
-
                 <img src="img/biblioteca.jpg" alt="Silent Library">
-
                 <div class="contenido-sala">
-
                     <h3>📚 Silent Library</h3>
-
-                    <p>
-                        Ambiente silencioso para lectura y concentración profunda.
-                    </p>
-
+                    <p>Ambiente silencioso para lectura y concentración profunda.</p>
                     <div class="info-sala">
                         <span>👥 12 estudiantes</span>
                         <span>🔕 Silencio</span>
                     </div>
-
                     <button>Unirse</button>
-
                 </div>
-
             </article>
 
-            <!-- SALA -->
             <article class="sala-card">
-
                 <img src="img/lluvia.jpg" alt="Rain Study">
-
                 <div class="contenido-sala">
-
                     <h3>🌧 Rain Study</h3>
-
-                    <p>
-                        Sonidos relajantes de lluvia para estudiar sin estrés.
-                    </p>
-
+                    <p>Sonidos relajantes de lluvia para estudiar sin estrés.</p>
                     <div class="info-sala">
                         <span>👥 24 estudiantes</span>
                         <span>🌧 Rain Sounds</span>
                     </div>
-
                     <button>Unirse</button>
-
                 </div>
-
             </article>
 
-            <!-- SALA -->
             <article class="sala-card">
-
                 <img src="img/noche.jpg" alt="Night Focus">
-
                 <div class="contenido-sala">
-
                     <h3>🌌 Night Focus</h3>
-
-                    <p>
-                        Sala nocturna con música ambiental y luces tenues.
-                    </p>
-
+                    <p>Sala nocturna con música ambiental y luces tenues.</p>
                     <div class="info-sala">
                         <span>👥 9 estudiantes</span>
                         <span>🎵 Ambient</span>
                     </div>
-
                     <button>Unirse</button>
-
                 </div>
-
             </article>
 
         </div>
-
     </main>
 
-    <!-- FOOTER -->
     <footer>
-
         <div class="sobre">
-
             <h2>Sobre FocusWave</h2>
-
-            <p>
-                FocusWave conecta estudiantes mediante salas virtuales
-                diseñadas para mejorar la productividad y concentración.
-            </p>
-
+            <p>FocusWave conecta estudiantes mediante salas virtuales diseñadas para mejorar la productividad y concentración.</p>
         </div>
-
         <p>FocusWave © 2025</p>
-
     </footer>
+
     <script src="js/modo-claro.js"></script>
     <script src="js/salas.js"></script>
     <script src="js/inicio.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/menu.js"></script>
 </body>
-
 </html>

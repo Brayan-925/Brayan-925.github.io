@@ -167,21 +167,23 @@ if (metodoGuardado) {
         btnEditar.addEventListener("click", function () {
             if (flashcardsFiltradas.length === 0) return;
             const actual = flashcardsFiltradas[indiceActual];
-            const nuevaPreg = prompt("Editar pregunta:", actual.pregunta);
+            const preguntaOriginal = actual.pregunta;
+            const respuestaOriginal = actual.respuesta;
+            const nuevaPreg = prompt("Editar pregunta:", preguntaOriginal);
             if (nuevaPreg === null || nuevaPreg.trim() === "") return;
-            const nuevaResp = prompt("Editar respuesta:", actual.respuesta);
+            const nuevaResp = prompt("Editar respuesta:", respuestaOriginal);
             if (nuevaResp === null || nuevaResp.trim() === "") return;
 
-            actual.pregunta = nuevaPreg.trim();
-            actual.respuesta = nuevaResp.trim();
-
-            // Actualizar en el array principal
-            const idxGlobal = todasLasFlashcards.findIndex(fc => fc.curso === actual.curso && fc.pregunta === actual.pregunta);
+            // Actualizar en el array principal usando los valores ORIGINALES para buscar
+            const idxGlobal = todasLasFlashcards.findIndex(fc => fc.curso === actual.curso && fc.pregunta === preguntaOriginal && fc.respuesta === respuestaOriginal);
             if (idxGlobal !== -1) {
-                todasLasFlashcards[idxGlobal] = actual;
+                todasLasFlashcards[idxGlobal].pregunta = nuevaPreg.trim();
+                todasLasFlashcards[idxGlobal].respuesta = nuevaResp.trim();
             }
             localStorage.setItem("misFlashcards", JSON.stringify(todasLasFlashcards));
-            cargarTarjeta();
+            // Recargar desde localStorage para sincronizar todo
+            todasLasFlashcards = JSON.parse(localStorage.getItem("misFlashcards")) || [];
+            aplicarFiltro();
         });
 
         // Botón Eliminar
