@@ -20,8 +20,17 @@ precargarDatosDemo();
 
 // Atajo para obtener el diccionario de textos dinámicos en el idioma actual
 function t() {
-    const idioma = (typeof window.obtenerIdioma === "function") ? window.obtenerIdioma() : "es";
-    return (window.textosDinamicos && window.textosDinamicos[idioma]) || window.textosDinamicos.es;
+    // Intentar obtener idioma desde localStorage primero
+    const idiomaLS = localStorage.getItem("idioma");
+    // También intentar leer del selector visual como respaldo
+    const selector = document.getElementById("selector-idioma");
+    const idiomaSelector = selector ? selector.value : null;
+    const idioma = idiomaLS || idiomaSelector || "es";
+    
+    if (window.textosDinamicos && window.textosDinamicos[idioma]) {
+        return window.textosDinamicos[idioma];
+    }
+    return window.textosDinamicos && window.textosDinamicos.es;
 }
 
 function actualizarRacha() {
@@ -62,8 +71,16 @@ const textoProgreso = document.getElementById("texto-progreso");
 
 // --- MENSAJE CUANDO NO HAY TAREAS ---
 function mostrarMensajeVacio() {
-    if (listaTareas.children.length === 0) {
-        listaTareas.innerHTML = `<p style="color: #94a3b8; text-align: center; padding: 10px 0;">${t().sinTareas}</p>`;
+    // Buscar si ya existe el mensaje de vacío
+    const mensajeExistente = listaTareas.querySelector('p[style*="text-align: center"]');
+    
+    if (listaTareas.children.length === 0 || mensajeExistente) {
+        // Si ya hay un mensaje de vacío, solo actualizar el texto
+        if (mensajeExistente) {
+            mensajeExistente.textContent = t().sinTareas;
+        } else {
+            listaTareas.innerHTML = `<p style="color: #94a3b8; text-align: center; padding: 10px 0;">${t().sinTareas}</p>`;
+        }
     }
 }
 
@@ -259,7 +276,7 @@ function mostrarProximaClase() {
         const minFaltan = diffMin % 60;
         const textoFaltan = horasFaltan > 0 ? `${horasFaltan}h ${minFaltan}m` : `${minFaltan}m`;
 
-        contenedor.innerHTML = `📌 <strong>${textos.proximaClase}</strong> ${proxima.nombre} ${textos.aLas} ${proxima.hora} ${textos.con} ${proxima.profesor} — ${textos.faltan} ${textoFaltan}`;
+        contenedor.innerHTML = textos.formatoProximaClase(proxima.nombre, proxima.hora, proxima.profesor, textoFaltan);
     } else if (cursosHoy.length > 0) {
         contenedor.innerHTML = `✅ ${textos.clasesTerminadas}`;
     } else {
@@ -298,6 +315,18 @@ window.refrescarTextosDinamicos = function () {
     cargarHorarioHoy();
     mostrarProximaClase();
     mostrarFraseDelDia();
+    // Actualizar también el texto de la frase motivacional y mensaje vacío de tareas
+    const mensajeTareas = listaTareas.querySelector('p[style*="text-align: center"]');
+    if (mensajeTareas) {
+        mensajeTareas.textContent = t().sinTareas;
+    }
+    const textoProgreso = document.getElementById("texto-progreso");
+    if (textoProgreso) {
+        const totalTareas = document.querySelectorAll('.tareas input[type="checkbox"]').length;
+        const tareasCompletadas = document.querySelectorAll('.tareas input[type="checkbox"]:checked').length;
+        const textos = t();
+        textoProgreso.textContent = `${tareasCompletadas} ${textos.de} ${totalTareas} ${textos.tareasCompletadas}`;
+    }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
