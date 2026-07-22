@@ -1,0 +1,43 @@
+/* HEADER AMBIENTES */
+
+.header-ambientes{
+    height: 320px;
+}
+
+/* MAIN */
+
+.pagina-ambientes{
+    padding: 50px 40px;
+}
+
+.pagina-ambientes h2{
+    text-align: center;
+
+    font-size: 36px;
+
+    margin-bottom: 40px;
+}
+
+/* GRID */
+
+.ambientes-grid{
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px){
+
+    .pagina-ambientes{
+        padding: 25px;
+    }
+
+    .pagina-ambientes h2{
+        font-size: 28px;
+    }
+
+}

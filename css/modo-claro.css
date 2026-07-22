@@ -1,0 +1,775 @@
+/* ==========================================================
+   MODO CLARO - FocusWave
+   Se activa agregando la clase "modo-claro" al <body>
+   (esto lo hace automáticamente modo-claro.js)
+   ========================================================== */
+
+/* LIENZO BASE (evita que quede negro detrás/alrededor en navegadores en modo oscuro) */
+html{
+    color-scheme: dark;
+}
+
+html.modo-claro{
+    color-scheme: light !important;
+    background: #eef2f7 !important;
+}
+
+body.modo-claro{
+    min-height: 100vh;
+}
+
+/* FONDO GENERAL */
+body.modo-claro{
+    background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(129,140,248,0.12), transparent 25%),
+    linear-gradient(
+        135deg,
+        #f8fafc,
+        #eef2f7,
+        #e2e8f0
+    ) !important;
+
+    color: #0f172a !important;
+}
+
+/* HEADER */
+body.modo-claro header{
+    background:
+    linear-gradient(rgba(248,250,252,0.88), rgba(248,250,252,0.88)),
+    url("../img/fondo.jpg") !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+body.modo-claro .logo p{
+    color: #334155 !important;
+}
+
+/* NAV */
+body.modo-claro nav{
+    background: rgba(255,255,255,0.85) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .buscador input{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro nav a{
+    color: #1e293b !important;
+}
+
+body.modo-claro nav a:hover{
+    background-color: rgba(56,189,248,0.15);
+    color: #0284c7 !important;
+}
+
+/* TITULOS */
+body.modo-claro section h2,
+body.modo-claro .panel h2,
+body.modo-claro footer h2,
+body.modo-claro .pagina-ambientes h2,
+body.modo-claro .pagina-contacto h2,
+body.modo-claro .pagina-cursos h2,
+body.modo-claro .pagina-metodos h2,
+body.modo-claro .pagina-salas h2,
+body.modo-claro .login-box h2,
+body.modo-claro .registro-box h2{
+    color: #0f172a !important;
+}
+
+/* CARD GENERAL */
+body.modo-claro .card,
+body.modo-claro .mini-card,
+body.modo-claro .panel,
+body.modo-claro .formulario,
+body.modo-claro .info-card,
+body.modo-claro .formulario-contacto,
+body.modo-claro .curso-card,
+body.modo-claro .metodo-card,
+body.modo-claro .login-box,
+body.modo-claro .registro-box,
+body.modo-claro .sala-card,
+body.modo-claro .panel-vidrio{
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .card:hover{
+    box-shadow:
+    0px 15px 35px rgba(0,0,0,0.12),
+    0px 0px 20px rgba(56,189,248,0.2);
+}
+
+body.modo-claro .card p,
+body.modo-claro .info-card p,
+body.modo-claro .metodo-card p,
+body.modo-claro .curso-card p,
+body.modo-claro .contenido-sala p,
+body.modo-claro .texto-login,
+body.modo-claro .registro,
+body.modo-claro .texto-registro,
+body.modo-claro .login-link{
+    color: #475569 !important;
+}
+
+/* TEXTOS SECUNDARIOS */
+body.modo-claro .info-sala,
+body.modo-claro .datos span{
+    color: #64748b !important;
+}
+
+body.modo-claro .datos span{
+    background-color: rgba(0,0,0,0.05) !important;
+}
+
+/* INPUTS Y FORMULARIOS */
+body.modo-claro .formulario input,
+body.modo-claro .formulario-contacto input,
+body.modo-claro .formulario-contacto textarea,
+body.modo-claro #formCurso input,
+body.modo-claro #input-mensaje{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* FOOTER */
+body.modo-claro footer{
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+    border-top: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* BARRA DE PROGRESO Y HORARIO */
+body.modo-claro .barra{
+    background-color: rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .horario-item{
+    background-color: rgba(0,0,0,0.04) !important;
+}
+
+body.modo-claro .tareas label{
+    color: #334155 !important;
+}
+
+/* SALA EN VIVO - CHAT */
+body.modo-claro .mensaje{
+    background: rgba(0,0,0,0.04) !important;
+}
+
+body.modo-claro .mensaje span{
+    color: #334155 !important;
+}
+
+body.modo-claro #caja-mensajes::-webkit-scrollbar-track{
+    background: rgba(0,0,0,0.05) !important;
+}
+
+/* BOTÓN DE CAMBIO DE TEMA */
+#boton-modo-claro{
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 2000;
+
+    width: 52px;
+    height: 52px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+
+    color: white;
+    font-size: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0px 6px 18px rgba(56,189,248,0.4);
+
+    transition: 0.3s;
+}
+
+#boton-modo-claro:hover{
+    transform: translateY(-3px);
+}
+
+body.modo-claro #menu-nav{
+    background: #f8fafc !important;
+    border-top: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro #menu-nav a{
+    color: #1e293b !important;
+}
+/* Sube un poco el contraste del degradado de fondo */
+body.modo-claro{
+    background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(129,140,248,0.22), transparent 30%),
+    linear-gradient(135deg, #f8fafc, #eef2f7, #e2e8f0) !important;
+}
+
+/* Bordes de tarjetas un poco más visibles */
+body.modo-claro .card,
+body.modo-claro .mini-card,
+body.modo-claro .panel,
+body.modo-claro .curso-card,
+body.modo-claro .sala-card{
+    border: 1px solid rgba(56,189,248,0.15) !important;
+}
+body.modo-claro #btn-menu{
+    color: #1e293b !important;
+}
+
+/* ==========================================================
+   ELEMENTOS ADICIONALES - Modo Claro
+   ========================================================== */
+
+/* PANEL VIDRIO (ambientes.html) */
+body.modo-claro .panel-vidrio{
+    background: rgba(255,255,255,0.7) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1) !important;
+}
+
+body.modo-claro .panel-vidrio h3{
+    color: #1e293b !important;
+}
+
+body.modo-claro .panel-vidrio #titulo-notas,
+body.modo-claro .panel-vidrio #bloc-notas{
+    color: #1e293b !important;
+}
+
+body.modo-claro #bloc-notas{
+    background-color: rgba(0,0,0,0.05) !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #reloj-ambiente{
+    color: #0f172a !important;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* NO sobrescribir background de #pantalla-inmersiva porque ambientes.js
+   lo establece dinámicamente con gradientes por cada ambiente */
+
+/* DIVISORES "o continúa con" (login/registro) */
+body.modo-claro .divider-line{
+    background: #cbd5e1 !important;
+}
+
+/* SELECTS y OPTIONS */
+body.modo-claro select,
+body.modo-claro #selector-idioma,
+body.modo-claro #selector-idioma-movil,
+body.modo-claro #filtro-curso,
+body.modo-claro #nuevo-curso,
+body.modo-claro #dia-curso{
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+body.modo-claro select option{
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
+/* MENU DRAWER Y OVERLAY (index.html) */
+body.modo-claro #menu-overlay{
+    background: rgba(0,0,0,0.3) !important;
+}
+
+body.modo-claro #menu-drawer{
+    background: #f8fafc !important;
+    border-right: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro #menu-drawer .text-sky-400,
+body.modo-claro #menu-drawer span{
+    color: #0284c7 !important;
+}
+
+body.modo-claro #menu-drawer a{
+    color: #1e293b !important;
+}
+
+body.modo-claro #menu-drawer a:hover{
+    background-color: rgba(56,189,248,0.15) !important;
+    color: #0284c7 !important;
+}
+
+body.modo-claro #menu-drawer .border-slate-800{
+    border-color: rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro #menu-drawer .text-slate-400{
+    color: #64748b !important;
+}
+
+body.modo-claro #btn-cerrar-drawer{
+    background: #e2e8f0 !important;
+    color: #475569 !important;
+}
+
+body.modo-claro #btn-cerrar-drawer:hover{
+    background: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+/* CURSOS HTML - Panel y formulario */
+body.modo-claro #form-curso input,
+body.modo-claro #form-curso select{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #form-curso label{
+    color: #475569 !important;
+}
+
+body.modo-claro #form-curso button[type="submit"]{
+    background: linear-gradient(to right, #38bdf8, #818cf8) !important;
+    color: white !important;
+}
+
+body.modo-claro #contenedor-cursos .card{
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+}
+
+/* METODO ACTIVO HTML */
+body.modo-claro #interfaz-reloj{
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+}
+
+body.modo-claro #interfaz-reloj #fase-actual{
+    /* Sin !important: metodo-activo.js lo cambia dinámicamente (#38bdf8 o #4ade80) */
+    color: #16a34a;
+}
+
+body.modo-claro #interfaz-reloj #tiempo-pantalla{
+    color: #0f172a;
+}
+
+body.modo-claro #btn-pausar{
+    background: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #tarjeta{
+    border: 2px dashed #38bdf8 !important;
+}
+
+body.modo-claro #texto-tarjeta{
+    /* Sin !important para permitir cambios de color dinámicos desde JS */
+    color: #0f172a;
+}
+
+body.modo-claro #form-flashcard input,
+body.modo-claro #form-flashcard select{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #form-flashcard label{
+    color: #475569 !important;
+}
+
+body.modo-claro #filtro-curso + label{
+    color: #475569 !important;
+}
+
+/* TÍTULO DEL MÉTODO ACTIVO e instrucciones */
+body.modo-claro #titulo-metodo{
+    color: #0284c7 !important;
+}
+
+body.modo-claro #instrucciones-metodo{
+    color: #475569 !important;
+}
+
+/* TÍTULO DE SALA EN VIVO */
+body.modo-claro #titulo-sala{
+    color: #0f172a !important;
+}
+
+/* SALA EN VIVO HTML */
+body.modo-claro #input-mensaje,
+body.modo-claro #form-chat input{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #caja-mensajes{
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+body.modo-claro #caja-mensajes .mensaje strong{
+    color: #1e293b !important;
+}
+
+/* NOTA: NO sobrescribir strong[style] en caja-mensajes porque
+   sala-en-vivo.js establece colores dinámicamente por cada sala */
+
+body.modo-claro #caja-mensajes .mensaje span{
+    color: #475569 !important;
+}
+
+/* SPOTIFY PLAYER - manejo dinámico con JS también */
+body.modo-claro .bg-slate-900\/80,
+body.modo-claro div[class*="bg-slate-900"]{
+    background: rgba(255,255,255,0.92) !important;
+    border-color: rgba(0,0,0,0.07) !important;
+}
+
+body.modo-claro .text-slate-200{
+    color: #1e293b !important;
+}
+
+body.modo-claro .text-slate-400{
+    color: #64748b !important;
+}
+
+body.modo-claro .bg-slate-800{
+    background: #e2e8f0 !important;
+}
+
+body.modo-claro .border-slate-800{
+    border-color: rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .bg-slate-950{
+    background: #f1f5f9 !important;
+    border-color: rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro #form-tarea input{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #nueva-tarea{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #proxima-clase{
+    background: rgba(56,189,248,0.08) !important;
+    border: 1px solid rgba(56,189,248,0.2) !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #proxima-clase p,
+body.modo-claro #proxima-clase h3,
+body.modo-claro #proxima-clase span{
+    color: #0f172a !important;
+}
+
+body.modo-claro #reloj-vivo{
+    color: #475569 !important;
+}
+
+body.modo-claro .bg-slate-900{
+    background: rgba(255,255,255,0.92) !important;
+}
+
+body.modo-claro nav.bg-slate-900{
+    background: rgba(255,255,255,0.85) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro .text-slate-200 a,
+body.modo-claro .text-slate-200{
+    color: #1e293b !important;
+}
+
+/* EISENHOWER MATRIX */
+body.modo-claro .eisenhower-form input,
+body.modo-claro .eisenhower-form select{
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro .cuadrante{
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+}
+
+body.modo-claro .item-tarea-eisen{
+    background: rgba(0,0,0,0.04) !important;
+}
+
+body.modo-claro .item-tarea-eisen .texto-tarea{
+    color: #1e293b !important;
+}
+
+body.modo-claro .eisenhower-titulo{
+    color: #0f172a !important;
+}
+
+body.modo-claro .eisenhower-descripcion{
+    color: #64748b !important;
+}
+
+/* NOTIFICACION VISUAL */
+body.modo-claro .notificacion-cambio.enfoque{
+    background: #e0f2fe !important;
+    border: 1px solid #0284c7 !important;
+    color: #0284c7 !important;
+}
+
+body.modo-claro .notificacion-cambio.descanso{
+    background: #fff7ed !important;
+    border: 1px solid #ea580c !important;
+    color: #ea580c !important;
+}
+
+/* RESPUESTA TARJETA (metodo-activo) */
+body.modo-claro #respuesta-tarjeta{
+    color: #16a34a !important;
+}
+
+/* SPOTIFY PLAYER - Badge y tabs */
+body.modo-claro .text-emerald-400{
+    color: #059669 !important;
+}
+
+body.modo-claro .bg-emerald-500\/10{
+    background: rgba(5,150,105,0.08) !important;
+}
+
+body.modo-claro .border-emerald-500\/20{
+    border-color: rgba(5,150,105,0.2) !important;
+}
+
+body.modo-claro .bg-emerald-500{
+    background: #059669 !important;
+}
+
+body.modo-claro .text-slate-950{
+    color: #f8fafc !important;
+}
+
+body.modo-claro .bg-emerald-500.animate-pulse{
+    background: #059669 !important;
+}
+
+/* MINI-CARDS - títulos y textos dentro de mini-cards */
+body.modo-claro .mini-card h3{
+    color: #0f172a !important;
+}
+
+body.modo-claro .mini-card p{
+    color: #475569 !important;
+}
+
+body.modo-claro .mini-card a{
+    color: #38bdf8 !important;
+}
+
+/* BLOQUE de rendimiento semanal - títulos con colores inline */
+body.modo-claro .mini-card h3[style*="color: #38bdf8"],
+body.modo-claro .mini-card h3[style*="color:#38bdf8"]{
+    color: #0284c7 !important;
+}
+
+body.modo-claro .mini-card h3[style*="color: #4ade80"],
+body.modo-claro .mini-card h3[style*="color:#4ade80"]{
+    color: #16a34a !important;
+}
+
+/* TABS de Spotify - botones inactivos */
+body.modo-claro #tab-piano,
+body.modo-claro #tab-synth{
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+body.modo-claro #tab-piano:hover,
+body.modo-claro #tab-synth:hover{
+    color: #0f172a !important;
+}
+
+/* TEXTO DE PROGRESO */
+body.modo-claro #texto-progreso{
+    color: #475569 !important;
+}
+
+/* HORARIO HOY */
+body.modo-claro #horario-hoy-contenedor{
+    color: #0f172a !important;
+}
+
+body.modo-claro #titulo-horario-hoy{
+    color: #0f172a !important;
+}
+
+/* FRASE DE MOTIVACIÓN */
+body.modo-claro #frase-motivacion{
+    color: #475569 !important;
+}
+
+/* BOTÓN DE ENVIAR TAREA */
+body.modo-claro #form-tarea button[type="submit"]{
+    background: linear-gradient(to right, #38bdf8, #818cf8) !important;
+    color: white !important;
+}
+
+/* SALUDO PERSONALIZADO */
+body.modo-claro #saludo-personalizado{
+    color: #0f172a !important;
+}
+
+/* BOTÓN EXPLORAR en header */
+body.modo-claro .explorar{
+    background: linear-gradient(to right, #38bdf8, #818cf8) !important;
+    color: white !important;
+    box-shadow: 0px 6px 20px rgba(56,189,248,0.3) !important;
+}
+
+body.modo-claro .explorar:hover{
+    transform: translateY(-3px) !important;
+}
+
+/* ==========================================================
+   ELEMENTOS DINÁMICOS - Creados por inicio.js
+   ========================================================== */
+
+/* TAREAS - labels dentro de las tareas */
+body.modo-claro .tareas label[style*="color: #e2e8f0"]{
+    color: #334155 !important;
+}
+
+/* TAREAS - labels tachados (completados) */
+body.modo-claro .tareas label[style*="text-decoration: line-through"]{
+    color: #94a3b8 !important;
+}
+
+/* BOTÓN ELIMINAR TAREA */
+body.modo-claro .btn-eliminar{
+    background: #dc2626 !important;
+    color: white !important;
+}
+
+/* HORARIO - items dinámicos generados por inicio.js */
+body.modo-claro #horario-hoy-contenedor > div{
+    background: rgba(255,255,255,0.85) !important;
+    border-left: 4px solid #38bdf8 !important;
+}
+
+body.modo-claro #horario-hoy-contenedor > div span[style*="color: #38bdf8"]{
+    color: #0284c7 !important;
+}
+
+body.modo-claro #horario-hoy-contenedor > div p[style*="color: #e2e8f0"]{
+    color: #0f172a !important;
+}
+
+body.modo-claro #horario-hoy-contenedor > div p[style*="color: #94a3b8"]{
+    color: #64748b !important;
+}
+
+body.modo-claro #horario-hoy-contenedor > div p[style*="color: #4ade80"]{
+    color: #16a34a !important;
+}
+
+/* MENSAJE "Sin clases hoy" / "Día libre" */
+body.modo-claro #horario-hoy-contenedor p[style*="color: #4ade80"]{
+    color: #16a34a !important;
+}
+
+/* MENSAJE VACÍO de tareas */
+body.modo-claro .tareas p[style*="color: #94a3b8"]{
+    color: #64748b !important;
+}
+
+/* ==========================================================
+   CURSOS HTML - Elementos restantes con inline styles
+   ========================================================== */
+
+/* Panel de añadir materia */
+body.modo-claro .panel h1[style*="color: #38bdf8"]{
+    color: #0284c7 !important;
+}
+
+/* Título "Mis Cursos Registrados" */
+body.modo-claro .contenedor h2[style*="color: #e2e8f0"]{
+    color: #0f172a !important;
+}
+
+/* Labels en formulario de cursos */
+body.modo-claro label[style*="color: #94a3b8"]{
+    color: #475569 !important;
+}
+
+/* ==========================================================
+   CONTACTO HTML - info-card inline style background
+   ========================================================== */
+body.modo-claro .info-card{
+    background: rgba(255,255,255,0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1) !important;
+}
+
+body.modo-claro .formulario-contacto{
+    background: rgba(255,255,255,0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1) !important;
+}
+
+/* ==========================================================
+   SALA EN VIVO - Panel de técnica actual
+   ========================================================== */
+body.modo-claro section .panel h2{
+    color: #0f172a !important;
+}
+
+body.modo-claro section .panel p[style*="color: #cbd5e1"]{
+    color: #475569 !important;
+}
+
+/* ==========================================================
+   LOGIN / REGISTRO - Divisores de redes sociales
+   ========================================================== */
+body.modo-claro .divider-social{
+    color: #64748b !important;
+}
+
+/* ==========================================================
+   REGISTRO - Login link
+   ========================================================== */
+body.modo-claro .login-link a{
+    color: #0284c7 !important;
+}
+
+body.modo-claro .registro a{
+    color: #0284c7 !important;
+}
