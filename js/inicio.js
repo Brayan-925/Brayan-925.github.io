@@ -299,3 +299,82 @@ window.refrescarTextosDinamicos = function () {
     mostrarProximaClase();
     mostrarFraseDelDia();
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAbrir = document.getElementById("btn-menu-abrir");
+    const btnCerrar = document.getElementById("btn-menu-cerrar");
+    const drawer = document.getElementById("menu-drawer");
+    const overlay = document.getElementById("menu-overlay");
+
+    function abrirMenu() {
+        if (!drawer || !overlay) return;
+        overlay.classList.remove("hidden");
+        setTimeout(() => {
+            overlay.classList.remove("opacity-0");
+            drawer.classList.remove("-translate-x-full");
+        }, 10);
+    }
+
+    function cerrarMenu() {
+        if (!drawer || !overlay) return;
+        drawer.classList.add("-translate-x-full");
+        overlay.classList.add("opacity-0");
+        setTimeout(() => {
+            overlay.classList.add("hidden");
+        }, 300);
+    }
+
+    if (btnAbrir) btnAbrir.addEventListener("click", abrirMenu);
+    if (btnCerrar) btnCerrar.addEventListener("click", cerrarMenu);
+    if (overlay) overlay.addEventListener("click", cerrarMenu);
+
+    // Sincronización del selector de idioma móvil con el de escritorio y con idioma.js
+    const selectorMovil = document.getElementById("selector-idioma-movil");
+    const selectorPC = document.getElementById("selector-idioma");
+
+    if (selectorMovil && selectorPC) {
+        if (typeof obtenerIdioma === "function") {
+            const idiomaActual = obtenerIdioma();
+            selectorMovil.value = idiomaActual;
+            selectorPC.value = idiomaActual;
+        }
+
+        selectorMovil.addEventListener("change", function (e) {
+            selectorPC.value = e.target.value;
+            if (typeof cambiarIdioma === "function") {
+                cambiarIdioma(e.target.value);
+            }
+        });
+
+        selectorPC.addEventListener("change", function (e) {
+            selectorMovil.value = e.target.value;
+        });
+    }
+});
+
+const playlistsSpotify = {
+    lofi: "https://open.spotify.com/embed/album/1PiqaSNptT2HN7Znz16fiK?utm_source=generator&si=6645ada3d24f4c1a",
+    piano: "https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator&theme=0",
+    synth: "https://open.spotify.com/embed/playlist/7gh5NAVKOqUZ8fPrM5NvXh?utm_source=generator&si=f1538e6c3b1241fa"
+};
+
+function cambiarPlaylist(tipo) {
+    const iframe = document.getElementById("spotify-player");
+    if (!iframe || !playlistsSpotify[tipo]) return;
+
+    // Cambiar la fuente del iframe
+    iframe.src = playlistsSpotify[tipo];
+
+    // Actualizar estilos visuales de las pestañas
+    const tabs = ['lofi', 'piano', 'synth'];
+    tabs.forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (!btn) return;
+
+        if (t === tipo) {
+            btn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-slate-950 transition-all cursor-pointer";
+        } else {
+            btn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-all cursor-pointer";
+        }
+    });
+}

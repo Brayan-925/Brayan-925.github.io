@@ -1,22 +1,46 @@
 document.addEventListener("DOMContentLoaded", function () {
     const btnMenu = document.getElementById("btn-menu");
-    const menuNav = document.getElementById("menu-nav");
+    const btnCerrar = document.getElementById("btn-cerrar-drawer");
+    const drawer = document.getElementById("menu-drawer");
+    const overlay = document.getElementById("menu-overlay");
 
-    if (btnMenu && menuNav) {
-        btnMenu.addEventListener("click", function () {
-            menuNav.classList.toggle("hidden");
+    function abrirDrawer() {
+        if (!drawer || !overlay) return;
+        overlay.classList.remove("hidden");
+        setTimeout(() => {
+            overlay.classList.remove("opacity-0");
+            drawer.classList.remove("-translate-x-full");
+        }, 10);
+    }
+
+    function cerrarDrawer() {
+        if (!drawer || !overlay) return;
+        drawer.classList.add("-translate-x-full");
+        overlay.classList.add("opacity-0");
+        setTimeout(() => {
+            overlay.classList.add("hidden");
+        }, 300);
+    }
+
+    if (btnMenu) btnMenu.addEventListener("click", abrirDrawer);
+    if (btnCerrar) btnCerrar.addEventListener("click", cerrarDrawer);
+    if (overlay) overlay.addEventListener("click", cerrarDrawer);
+
+    // Sincronización del selector de idioma entre Escritorio y Móvil
+    const selectorPC = document.getElementById("selector-idioma");
+    const selectorMovil = document.getElementById("selector-idioma-movil");
+
+    if (selectorPC && selectorMovil) {
+        // Sincronizar cambios desde el menú móvil hacia el sistema general
+        selectorMovil.addEventListener("change", function (e) {
+            selectorPC.value = e.target.value;
+            // Emitir evento change para activar la traducción de idioma.js
+            selectorPC.dispatchEvent(new Event("change"));
+        });
+
+        // Sincronizar cambios desde la versión PC hacia el móvil
+        selectorPC.addEventListener("change", function (e) {
+            selectorMovil.value = e.target.value;
         });
     }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const paginaActual = window.location.pathname.split("/").pop() || "index.html";
-    const enlaces = document.querySelectorAll("#menu-nav a");
-
-    enlaces.forEach(function (enlace) {
-        if (enlace.getAttribute("href") === paginaActual) {
-            enlace.style.color = "#38bdf8";
-            enlace.style.fontWeight = "900";
-        }
-    });
 });
