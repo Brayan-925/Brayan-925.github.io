@@ -44,7 +44,12 @@ const traducciones = {
         estado_musica: "🎧 Lo-fi activo",
         motivacion_titulo: "Motivación",
         sobre_titulo: "Sobre FocusWave",
-        sobre_texto: "FocusWave es una plataforma diseñada para mejorar la concentración y productividad de los estudiantes mediante ambientes virtuales y herramientas académicas."
+        sobre_texto: "FocusWave es una plataforma diseñada para mejorar la concentración y productividad de los estudiantes mediante ambientes virtuales y herramientas académicas.",
+        player_title: "Música de Concentración",
+        player_badge: "Spotify Integrado",
+        tab_lofi: "🎧 Lofi Girl",
+        tab_piano: "🎹 Piano Deep",
+        tab_synth: "🌌 Synthwave"
     },
     en: {
         tagline: "Your academic focus space",
@@ -85,8 +90,13 @@ const traducciones = {
         estado_musica: "🎧 Lo-fi playing",
         motivacion_titulo: "Motivation",
         sobre_titulo: "About FocusWave",
-        sobre_texto: "FocusWave is a platform designed to improve students' focus and productivity through virtual environments and academic tools."
-    },
+        sobre_texto: "FocusWave is a platform designed to improve students' focus and productivity through virtual environments and academic tools.",
+        player_title: "Focus Music",
+        player_badge: "Spotify Embed",
+        tab_lofi: "🎧 Lofi Girl",
+        tab_piano: "🎹 Deep Piano",
+        tab_synth: "🌌 Synthwave"
+    },  
     ja: {
         tagline: "集中力を高める、あなたの学習スペース",
         explorar: "環境を探す",
@@ -126,7 +136,12 @@ const traducciones = {
         estado_musica: "🎧 ローファイ再生中",
         motivacion_titulo: "モチベーション",
         sobre_titulo: "FocusWaveについて",
-        sobre_texto: "FocusWaveは、仮想環境と学習ツールを通じて学生の集中力と生産性を高めるために設計されたプラットフォームです。"
+        sobre_texto: "FocusWaveは、仮想環境と学習ツールを通じて学生の集中力と生産性を高めるために設計されたプラットフォームです。",
+        player_title: "集中用BGM",
+        player_badge: "Spotify連携",
+        tab_lofi: "🎧 ローファイ Girl",
+        tab_piano: "🎹 ディープピアノ",
+        tab_synth: "🌌 シンセウェーブ"
     }
 };
 
