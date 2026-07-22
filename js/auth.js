@@ -1,45 +1,73 @@
 // Este código se ejecuta en cuanto carga la página
-document.addEventListener("DOMContentLoaded", function() {
-    
-    // Revisamos la "memoria" del navegador
+function actualizarMenusSesion() {
     const sesionActiva = localStorage.getItem("sesionActiva");
     const nombreUsuario = localStorage.getItem("usuarioActual") || "Estudiante";
 
-    // Buscamos la lista de enlaces de navegación (nav ul)
+    // --- MENÚ DE ESCRITORIO (nav ul) ---
     const navUl = document.querySelector("nav ul");
-
-    // Si la sesión está activa y encontramos el menú de navegación
     if (sesionActiva === "true" && navUl) {
-        
-        // 1. Buscamos y eliminamos los botones de Iniciar Sesión y Registrarse
-        // (se identifican por su "href", no por su texto, para que funcione sin importar el idioma activo)
+        // Eliminar enlaces de Iniciar sesión y Registrarse
         const enlaces = navUl.querySelectorAll("li a");
         for (let i = 0; i < enlaces.length; i++) {
             const destino = enlaces[i].getAttribute("href");
             if (destino === "iniciarSesion.html" || destino === "registrarse.html") {
-                enlaces[i].parentElement.remove(); // Borramos el <li> completo
+                enlaces[i].parentElement.remove();
             }
         }
 
-        // 2. Creamos el botón con el saludo al usuario
-        const liPerfil = document.createElement("li");
-        liPerfil.innerHTML = `<a href="#" style="color: #38bdf8;">Hola, ${nombreUsuario}</a>`;
+        // Verificar si ya se agregaron los elementos de sesión (para no duplicar)
+        if (!navUl.querySelector("#btn-cerrar-sesion")) {
+            const liPerfil = document.createElement("li");
+            liPerfil.innerHTML = `<a href="#" style="color: #38bdf8; pointer-events: none;">👤 ${nombreUsuario}</a>`;
 
-        // 3. Creamos el botón de Cerrar Sesión
-        const liCerrar = document.createElement("li");
-        liCerrar.innerHTML = `<a href="#" id="btn-cerrar-sesion" style="color: #ef4444;">Cerrar sesión</a>`;
+            const liCerrar = document.createElement("li");
+            liCerrar.innerHTML = `<a href="#" id="btn-cerrar-sesion" style="color: #ef4444;">🚪 Cerrar sesión</a>`;
 
-        // 4. Los agregamos al final del menú
-        navUl.appendChild(liPerfil);
-        navUl.appendChild(liCerrar);
+            navUl.appendChild(liPerfil);
+            navUl.appendChild(liCerrar);
 
-        // 5. Le damos funcionalidad al botón de Cerrar Sesión
-        document.getElementById("btn-cerrar-sesion").addEventListener("click", function(event) {
-            event.preventDefault();
-            // Borramos la marca de sesión activa
-            localStorage.removeItem("sesionActiva");
-            // Recargamos la página para que vuelvan a aparecer los botones originales
-            window.location.href = "iniciarSesion.html";
-        });
+            document.getElementById("btn-cerrar-sesion").addEventListener("click", function(event) {
+                event.preventDefault();
+                cerrarSesion();
+            });
+        }
     }
-});
+
+    // --- MENÚ MÓVIL (drawer) ---
+    const drawerUl = document.querySelector("#menu-drawer ul");
+    if (sesionActiva === "true" && drawerUl) {
+        // Eliminar enlaces de Iniciar sesión y Registrarse del drawer
+        const enlacesDrawer = drawerUl.querySelectorAll("li a");
+        for (let i = 0; i < enlacesDrawer.length; i++) {
+            const destino = enlacesDrawer[i].getAttribute("href");
+            if (destino === "iniciarSesion.html" || destino === "registrarse.html") {
+                enlacesDrawer[i].parentElement.remove();
+            }
+        }
+
+        // Verificar si ya se agregaron en el drawer
+        if (!drawerUl.querySelector("#btn-cerrar-sesion-drawer")) {
+            const liPerfilDrawer = document.createElement("li");
+            liPerfilDrawer.innerHTML = `<a href="#" class="block py-2 px-3 text-sky-400 font-medium rounded-lg" style="pointer-events: none;">👤 ${nombreUsuario}</a>`;
+
+            const liCerrarDrawer = document.createElement("li");
+            liCerrarDrawer.innerHTML = `<a href="#" id="btn-cerrar-sesion-drawer" class="block py-2 px-3 text-red-400 hover:bg-slate-800 font-medium rounded-lg transition-colors">🚪 Cerrar sesión</a>`;
+
+            drawerUl.appendChild(liPerfilDrawer);
+            drawerUl.appendChild(liCerrarDrawer);
+
+            document.getElementById("btn-cerrar-sesion-drawer").addEventListener("click", function(event) {
+                event.preventDefault();
+                cerrarSesion();
+            });
+        }
+    }
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("sesionActiva");
+    // Recargar para que los menús vuelvan a su estado original
+    window.location.href = "iniciarSesion.html";
+}
+
+document.addEventListener("DOMContentLoaded", actualizarMenusSesion);
