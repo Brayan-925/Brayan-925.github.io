@@ -2,13 +2,13 @@ const formCurso = document.getElementById("form-curso");
 const contenedorCursos = document.getElementById("contenedor-cursos");
 
 // Al cargar el documento, mostramos los cursos que ya estén guardados
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     dibujarCursos();
 });
 
 // Evento para procesar el formulario al enviar
 if (formCurso) {
-    formCurso.addEventListener("submit", function(event) {
+    formCurso.addEventListener("submit", function (event) {
         event.preventDefault();
 
         // Captura de valores de los inputs
@@ -16,7 +16,10 @@ if (formCurso) {
         const dia = document.getElementById("dia-curso").value;
         const profesor = document.getElementById("profesor-curso").value;
         const hora = document.getElementById("hora-curso").value;
-
+        if (nombre === "" || profesor === "") {
+            alert("Por favor completa el nombre del curso y el profesor.");
+            return;
+        }
         // Recuperamos la base de datos de localStorage
         let misCursos = JSON.parse(localStorage.getItem("listaCursosCompletos")) || [];
 
@@ -30,7 +33,7 @@ if (formCurso) {
 
         // Insertamos el nuevo objeto al arreglo
         misCursos.push(nuevoCurso);
-        
+
         // Algoritmo de ordenamiento por día de la semana y luego por hora cronológica
         const ordenDias = { "Lunes": 1, "Martes": 2, "Miércoles": 3, "Jueves": 4, "Viernes": 5, "Sábado": 6, "Domingo": 7 };
         misCursos.sort((a, b) => {
@@ -52,7 +55,7 @@ if (formCurso) {
 // Función encargada de renderizar el HTML de las tarjetas
 function dibujarCursos() {
     if (!contenedorCursos) return;
-    
+
     let misCursos = JSON.parse(localStorage.getItem("listaCursosCompletos")) || [];
     contenedorCursos.innerHTML = "";
 
@@ -62,12 +65,12 @@ function dibujarCursos() {
     }
 
     // Recorremos el arreglo mapeando los datos a elementos HTML
-    misCursos.forEach(function(curso, index) {
+    misCursos.forEach(function (curso, index) {
         const tarjeta = document.createElement("article");
         tarjeta.style.background = "rgba(30, 41, 59, 0.6)";
         tarjeta.style.padding = "20px";
         tarjeta.style.borderRadius = "12px";
-        tarjeta.style.borderLeft = "4px solid #818cf8"; 
+        tarjeta.style.borderLeft = "4px solid #818cf8";
         tarjeta.style.position = "relative";
         tarjeta.style.boxShadow = "0 4px 10px rgba(0,0,0,0.1)";
 
@@ -91,13 +94,13 @@ function dibujarCursos() {
 function activarBotonesEliminar() {
     const botones = document.querySelectorAll(".btn-eliminar-curso");
     botones.forEach(boton => {
-        boton.addEventListener("click", function() {
+        boton.addEventListener("click", function () {
             const indice = this.getAttribute("data-index");
             let misCursos = JSON.parse(localStorage.getItem("listaCursosCompletos"));
-            
+            if (!confirm("¿Seguro que quieres eliminar este curso?")) return;
             // Removemos el elemento del arreglo usando su índice
             misCursos.splice(indice, 1);
-            
+
             // Sincronizamos los cambios con el almacenamiento local
             localStorage.setItem("listaCursosCompletos", JSON.stringify(misCursos));
             dibujarCursos();

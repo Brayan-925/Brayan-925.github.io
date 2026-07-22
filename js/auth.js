@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
     if (sesionActiva === "true" && navUl) {
         
         // 1. Buscamos y eliminamos los botones de Iniciar Sesión y Registrarse
+        // (se identifican por su "href", no por su texto, para que funcione sin importar el idioma activo)
         const enlaces = navUl.querySelectorAll("li a");
         for (let i = 0; i < enlaces.length; i++) {
-            if (enlaces[i].textContent === "Iniciar sesión" || enlaces[i].textContent === "Registrarse") {
+            const destino = enlaces[i].getAttribute("href");
+            if (destino === "iniciarSesion.html" || destino === "registrarse.html") {
                 enlaces[i].parentElement.remove(); // Borramos el <li> completo
             }
         }

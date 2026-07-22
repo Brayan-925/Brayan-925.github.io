@@ -205,3 +205,31 @@ body.modo-claro #caja-mensajes::-webkit-scrollbar-track{
 #boton-modo-claro:hover{
     transform: translateY(-3px);
 }
+
+body.modo-claro #menu-nav{
+    background: #f8fafc !important;
+    border-top: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+body.modo-claro #menu-nav a{
+    color: #1e293b !important;
+}
+/* Sube un poco el contraste del degradado de fondo */
+body.modo-claro{
+    background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(129,140,248,0.22), transparent 30%),
+    linear-gradient(135deg, #f8fafc, #eef2f7, #e2e8f0) !important;
+}
+
+/* Bordes de tarjetas un poco más visibles */
+body.modo-claro .card,
+body.modo-claro .mini-card,
+body.modo-claro .panel,
+body.modo-claro .curso-card,
+body.modo-claro .sala-card{
+    border: 1px solid rgba(56,189,248,0.15) !important;
+}
+body.modo-claro #btn-menu{
+    color: #1e293b !important;
+}

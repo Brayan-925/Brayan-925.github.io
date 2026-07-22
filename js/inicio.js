@@ -1,3 +1,57 @@
+// --- DATOS DE EJEMPLO PARA LA PRIMERA VISITA ---
+// Si es la primera vez que se abre (no hay cursos guardados),
+// precargamos algunos datos de ejemplo para que el panel no se vea vacío
+function precargarDatosDemo() {
+    const yaHayCursos = localStorage.getItem("listaCursosCompletos");
+
+    if (!yaHayCursos) {
+        const cursosDemo = [
+            { nombre: "Cálculo Integral", dia: "Lunes", profesor: "Ing. Torres", hora: "08:00" },
+            { nombre: "Base de Datos", dia: "Martes", profesor: "Ing. Salazar", hora: "09:00" },
+            { nombre: "Programación Web", dia: "Miércoles", profesor: "Ing. Vidal", hora: "10:00" },
+            { nombre: "Física II", dia: "Jueves", profesor: "Ing. Ramírez", hora: "11:00" },
+            { nombre: "Ingeniería de Software", dia: "Viernes", profesor: "Ing. Cabrera", hora: "13:00" }
+        ];
+        localStorage.setItem("listaCursosCompletos", JSON.stringify(cursosDemo));
+    }
+}
+
+precargarDatosDemo();
+
+// Atajo para obtener el diccionario de textos dinámicos en el idioma actual
+function t() {
+    const idioma = (typeof window.obtenerIdioma === "function") ? window.obtenerIdioma() : "es";
+    return (window.textosDinamicos && window.textosDinamicos[idioma]) || window.textosDinamicos.es;
+}
+
+function actualizarRacha() {
+    const hoy = new Date().toDateString(); // Ej: "Tue Jul 21 2026"
+    const ultimaVisita = localStorage.getItem("ultimaVisita");
+    let racha = parseInt(localStorage.getItem("rachaDias")) || 0;
+
+    if (ultimaVisita !== hoy) {
+        const ayer = new Date();
+        ayer.setDate(ayer.getDate() - 1);
+
+        if (ultimaVisita === ayer.toDateString()) {
+            racha++; // Visitó ayer también, la racha sigue
+        } else {
+            racha = 1; // Rompió la racha, empieza de nuevo
+        }
+
+        localStorage.setItem("ultimaVisita", hoy);
+        localStorage.setItem("rachaDias", racha);
+    }
+
+    const elementoRacha = document.getElementById("racha-dias");
+    if (elementoRacha) {
+        const textos = t();
+        const etiquetaDia = racha !== 1 ? textos.dias : textos.dia;
+        elementoRacha.textContent = `${racha} ${etiquetaDia}`;
+    }
+}
+
+actualizarRacha();
 // --- VARIABLES ---
 const listaTareas = document.getElementById("lista-tareas");
 const formTarea = document.getElementById("form-tarea");
@@ -6,36 +60,45 @@ const inputTarea = document.getElementById("nueva-tarea");
 const barraProgreso = document.getElementById("barra-progreso");
 const textoProgreso = document.getElementById("texto-progreso");
 
+// --- MENSAJE CUANDO NO HAY TAREAS ---
+function mostrarMensajeVacio() {
+    if (listaTareas.children.length === 0) {
+        listaTareas.innerHTML = `<p style="color: #94a3b8; text-align: center; padding: 10px 0;">${t().sinTareas}</p>`;
+    }
+}
+
 // --- FUNCIÓN PARA CALCULAR LA BARRA ---
 function actualizarProgreso() {
-    // Contamos cuántas tareas hay en total y cuántas están marcadas
     const totalTareas = document.querySelectorAll('.tareas input[type="checkbox"]').length;
     const tareasCompletadas = document.querySelectorAll('.tareas input[type="checkbox"]:checked').length;
 
-    // Calculamos el porcentaje matemático
     let porcentaje = 0;
     if (totalTareas > 0) {
         porcentaje = (tareasCompletadas / totalTareas) * 100;
     }
 
-    // Actualizamos la barra y el texto visualmente
     barraProgreso.style.width = porcentaje + "%";
-    textoProgreso.textContent = `${tareasCompletadas} de ${totalTareas} tareas completadas`;
+    const textos = t();
+    textoProgreso.textContent = `${tareasCompletadas} ${textos.de} ${totalTareas} ${textos.tareasCompletadas}`;
+
+    mostrarMensajeVacio();
 }
 
 // --- AGREGAR UNA NUEVA TAREA ---
 formTarea.addEventListener("submit", function (event) {
-    event.preventDefault(); // Evitamos que la página parpadee
+    event.preventDefault();
 
     const texto = inputTarea.value;
 
-    // Creamos un nuevo elemento de lista (li)
+    // Si estaba el mensaje de "no tienes tareas", lo quitamos
+    const mensajeVacio = listaTareas.querySelector("p");
+    if (mensajeVacio) mensajeVacio.remove();
+
     const nuevoLi = document.createElement("li");
     nuevoLi.style.display = "flex";
-    nuevoLi.style.justifyContent = "space-between"; // Separa el texto del botón de borrar
+    nuevoLi.style.justifyContent = "space-between";
     nuevoLi.style.alignItems = "center";
 
-    // Le inyectamos la casilla de verificación, el texto y un botón rojo de eliminar
     nuevoLi.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center;">
             <input type="checkbox">
@@ -44,18 +107,15 @@ formTarea.addEventListener("submit", function (event) {
         <button class="btn-eliminar" style="background: #ef4444; color: white; border: none; border-radius: 5px; padding: 4px 8px; font-size: 12px;">X</button>
     `;
 
-    // Lo metemos a la lista
     listaTareas.appendChild(nuevoLi);
-    inputTarea.value = ""; // Limpiamos el cajón
+    inputTarea.value = "";
 
-    actualizarProgreso(); // Actualizamos la barra porque hay una tarea nueva
+    actualizarProgreso();
 });
 
 // --- TACHAR O ELIMINAR TAREAS ---
-// Usamos el truco de escuchar clics en toda la lista, no en cada elemento individual
 listaTareas.addEventListener("click", function (event) {
 
-    // Si hicimos clic en una casilla (checkbox)
     if (event.target.type === "checkbox") {
         const etiqueta = event.target.nextElementSibling;
 
@@ -66,18 +126,16 @@ listaTareas.addEventListener("click", function (event) {
             etiqueta.style.textDecoration = "none";
             etiqueta.style.color = "#e2e8f0";
         }
-        actualizarProgreso(); // Recalculamos la barra
+        actualizarProgreso();
     }
 
-    // Si hicimos clic en el botón rojo de la "X" (clase btn-eliminar)
     if (event.target.classList.contains("btn-eliminar")) {
         const tareaCompleta = event.target.parentElement;
-        listaTareas.removeChild(tareaCompleta); // Borramos la tarea
-        actualizarProgreso(); // Recalculamos la barra
+        listaTareas.removeChild(tareaCompleta);
+        actualizarProgreso();
     }
 });
 
-// Llamamos a la barra por primera vez para que arranque en "0 de 0"
 actualizarProgreso();
 
 // --- SALUDO Y RELOJ DINÁMICO ---
@@ -85,77 +143,68 @@ const elementoSaludo = document.getElementById("saludo-personalizado");
 const elementoReloj = document.getElementById("reloj-vivo");
 
 function actualizarRelojYSaludo() {
-    // Obtenemos la hora actual del sistema
     const ahora = new Date();
     let horas = ahora.getHours();
     let minutos = ahora.getMinutes();
     let segundos = ahora.getSeconds();
 
-    // 1. Lógica para el saludo condicional
-    let saludo = "Buenas noches";
+    const textos = t();
+
+    let saludo = textos.buenasNoches;
     if (horas >= 6 && horas < 12) {
-        saludo = "Buenos días";
+        saludo = textos.buenosDias;
     } else if (horas >= 12 && horas < 19) {
-        saludo = "Buenas tardes";
+        saludo = textos.buenasTardes;
     }
 
-    // 2. Verificamos si hay una sesión activa antes de buscar el nombre
-    let nombreUsuario = "Estudiante"; // Nombre por defecto para invitados
+    let nombreUsuario = textos.estudiante;
 
     if (localStorage.getItem("sesionActiva") === "true") {
-        // Solo si la sesión está activa, usamos el nombre guardado
-        nombreUsuario = localStorage.getItem("usuarioActual") || "Estudiante";
+        nombreUsuario = localStorage.getItem("usuarioActual") || textos.estudiante;
     }
-    // -------------------------------
 
-    // Mostramos el saludo
     if (elementoSaludo) {
         elementoSaludo.textContent = `${saludo}, ${nombreUsuario} 👋`;
     }
 
-    // 3. Formateamos el reloj para que siempre tenga 2 dígitos
     if (horas < 10) horas = "0" + horas;
     if (minutos < 10) minutos = "0" + minutos;
     if (segundos < 10) segundos = "0" + segundos;
 
-    // Mostramos la hora en pantalla
     if (elementoReloj) {
-        elementoReloj.textContent = `Hora actual: ${horas}:${minutos}:${segundos}`;
+        elementoReloj.textContent = `${textos.horaActual}: ${horas}:${minutos}:${segundos}`;
     }
 }
 
-// Ejecutamos la función cada 1000 milisegundos (1 segundo) para que el reloj funcione
 setInterval(actualizarRelojYSaludo, 1000);
-actualizarRelojYSaludo(); // Llamamos a la función una vez de inmediato para que no espere 1 segundo al cargar
+actualizarRelojYSaludo();
 
 // --- LÓGICA DE HORARIO INTELIGENTE ---
+// Nota: los días se guardan siempre en español en localStorage (así los registra cursos.js),
+// así que el filtrado usa siempre los nombres en español; solo la etiqueta mostrada se traduce.
+const diasSemanaEs = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
 function cargarHorarioHoy() {
     const contenedorHorario = document.getElementById("horario-hoy-contenedor");
-    // Buscamos el h2 que está justo arriba del contenedor para cambiarle el texto
     const tituloHorario = contenedorHorario ? contenedorHorario.previousElementSibling : null;
-    
+
     if (!contenedorHorario) return;
 
-    // 1. Averiguar qué día es hoy en español
-    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const textos = t();
     const hoy = new Date();
-    const diaActual = diasSemana[hoy.getDay()];
+    const diaActual = diasSemanaEs[hoy.getDay()];
 
     if (tituloHorario) {
-        tituloHorario.textContent = `Clases de Hoy (${diaActual})`;
+        tituloHorario.textContent = `${textos.clasesDeHoy} (${textos.nombresDias[diaActual]})`;
     }
 
-    // 2. Traer todos los cursos de la memoria 
     let misCursos = JSON.parse(localStorage.getItem("listaCursosCompletos")) || [];
-
-    // 3. Filtrar estrictamente los que coinciden con el día actual
     let cursosHoy = misCursos.filter(curso => curso.dia === diaActual);
 
     contenedorHorario.innerHTML = "";
 
-    // 4. Mostrar los resultados
     if (cursosHoy.length === 0) {
-        contenedorHorario.innerHTML = `<p style="color: #4ade80; text-align: center; font-size: 14px; margin-top: 10px;">¡Día libre! No tienes clases registradas para hoy.</p>`;
+        contenedorHorario.innerHTML = `<p style="color: #4ade80; text-align: center; font-size: 14px; margin-top: 10px;">${textos.diaLibre}</p>`;
     } else {
         cursosHoy.forEach(curso => {
             const item = document.createElement("div");
@@ -177,6 +226,76 @@ function cargarHorarioHoy() {
     }
 }
 
-// Ejecutamos la función inmediatamente al cargar la página
 cargarHorarioHoy();
 
+function mostrarProximaClase() {
+    const contenedor = document.getElementById("proxima-clase");
+    if (!contenedor) return;
+
+    const textos = t();
+    const ahora = new Date();
+    const diaActual = diasSemanaEs[ahora.getDay()];
+
+    let misCursos = JSON.parse(localStorage.getItem("listaCursosCompletos")) || [];
+    let cursosHoy = misCursos.filter(curso => curso.dia === diaActual);
+
+    let proxima = null;
+    let fechaProxima = null;
+
+    cursosHoy.forEach(curso => {
+        const [h, m] = curso.hora.split(":").map(Number);
+        const fechaCurso = new Date();
+        fechaCurso.setHours(h, m, 0, 0);
+
+        if (fechaCurso > ahora && (!fechaProxima || fechaCurso < fechaProxima)) {
+            proxima = curso;
+            fechaProxima = fechaCurso;
+        }
+    });
+
+    if (proxima) {
+        const diffMin = Math.floor((fechaProxima - ahora) / 60000);
+        const horasFaltan = Math.floor(diffMin / 60);
+        const minFaltan = diffMin % 60;
+        const textoFaltan = horasFaltan > 0 ? `${horasFaltan}h ${minFaltan}m` : `${minFaltan}m`;
+
+        contenedor.innerHTML = `📌 <strong>${textos.proximaClase}</strong> ${proxima.nombre} ${textos.aLas} ${proxima.hora} ${textos.con} ${proxima.profesor} — ${textos.faltan} ${textoFaltan}`;
+    } else if (cursosHoy.length > 0) {
+        contenedor.innerHTML = `✅ ${textos.clasesTerminadas}`;
+    } else {
+        contenedor.innerHTML = `🎉 ${textos.sinClasesHoy}`;
+    }
+}
+
+mostrarProximaClase();
+setInterval(mostrarProximaClase, 1000); // Se actualiza solo, cada segundo
+
+document.querySelectorAll(".mini-card").forEach(function (tarjeta, indice) {
+    tarjeta.style.animationDelay = `${indice * 0.08}s`;
+});
+
+function mostrarFraseDelDia() {
+    const elementoFrase = document.getElementById("frase-motivacion");
+    if (!elementoFrase) return;
+
+    const frases = t().frases;
+    const hoy = new Date();
+    const inicioAno = new Date(hoy.getFullYear(), 0, 0);
+    const diaDelAno = Math.floor((hoy - inicioAno) / 86400000);
+
+    elementoFrase.textContent = `"${frases[diaDelAno % frases.length]}"`;
+}
+
+mostrarFraseDelDia();
+
+// --- REFRESCO AL CAMBIAR DE IDIOMA ---
+// idioma.js llama a esta función cuando el usuario cambia el idioma,
+// para actualizar todo el contenido dinámico sin recargar la página
+window.refrescarTextosDinamicos = function () {
+    actualizarRacha();
+    actualizarProgreso();
+    actualizarRelojYSaludo();
+    cargarHorarioHoy();
+    mostrarProximaClase();
+    mostrarFraseDelDia();
+};

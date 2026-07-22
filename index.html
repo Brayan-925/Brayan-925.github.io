@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/modo-claro.css">
     <link rel="icon" href="img/icono.png">
+
+    <!-- CDN de Tailwind CSS (se mantiene solo para el menú responsive) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -16,25 +22,44 @@
     <header>
         <div class="logo">
             <h1>FocusWave</h1>
-            <p>Tu espacio académico de concentración</p>
+            <p data-i18n="tagline">Tu espacio académico de concentración</p>
 
             <a href="ambientes.html" class="explorar">
-                Explorar ambientes
+                <i class="fa-solid fa-compass"></i> <span data-i18n="explorar">Explorar ambientes</span>
             </a>
         </div>
     </header>
 
     <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="ambientes.html">Ambientes</a></li>
-            <li><a href="cursos.html">Cursos</a></li>
-            <li><a href="salas.html">Salas</a></li>
-            <li><a href="metodos.html">Métodos</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
-            <li><a href="registrarse.html">Registrarse</a></li>
-        </ul>
+        <div class="flex items-center justify-between md:justify-center relative">
+
+            <!-- Botón hamburguesa: solo se ve en pantallas chicas -->
+            <button id="btn-menu" class="md:hidden text-2xl bg-transparent border-none cursor-pointer">
+                ☰
+            </button>
+
+            <!-- Lista de enlaces -->
+            <ul id="menu-nav" class="hidden md:flex flex-col md:flex-row items-center gap-2 md:gap-5 list-none
+                   absolute md:static top-full left-0 w-full md:w-auto
+                   bg-slate-800 md:bg-transparent p-4 md:p-0">
+                <li><a href="index.html" data-i18n="nav_inicio">Inicio</a></li>
+                <li><a href="ambientes.html" data-i18n="nav_ambientes">Ambientes</a></li>
+                <li><a href="cursos.html" data-i18n="nav_cursos">Cursos</a></li>
+                <li><a href="salas.html" data-i18n="nav_salas">Salas</a></li>
+                <li><a href="metodos.html" data-i18n="nav_metodos">Métodos</a></li>
+                <li><a href="contacto.html" data-i18n="nav_contacto">Contacto</a></li>
+                <li><a href="iniciarSesion.html" data-i18n="nav_login">Iniciar sesión</a></li>
+                <li><a href="registrarse.html" data-i18n="nav_registro">Registrarse</a></li>
+                <li>
+                    <select id="selector-idioma"
+                        style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; outline: none;">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <main class="contenedor">
@@ -42,90 +67,110 @@
         <section>
 
             <h2 id="saludo-personalizado">Tu Panel de Control</h2>
+
+            <!-- Estructura corregida: Se separó el reloj del bloque de próxima clase -->
             <p id="reloj-vivo"
-                style="color: #94a3b8; margin-top: -15px; margin-bottom: 25px; font-size: 18px; font-weight: bold;"></p>
+                style="color: #94a3b8; margin-top: -15px; margin-bottom: 15px; font-size: 18px; font-weight: bold;"></p>
+
+            <div id="proxima-clase"
+                style="background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 16px 20px; margin-bottom: 25px;">
+                <!-- Contenido inyectado por inicio.js -->
+            </div>
+
             <div class="grid">
                 <article class="mini-card"
                     style="border-left: 4px solid #38bdf8; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <h3>🎧 Entrar a una sala</h3>
-                        <p>Únete a un stream de estudio con otros compañeros y evita distracciones.</p>
+                        <h3><i class="fa-solid fa-headphones" style="color: #38bdf8;"></i> <span
+                                data-i18n="card1_titulo">Entrar a una sala</span></h3>
+                        <p data-i18n="card1_texto">Únete a un stream de estudio con otros compañeros y evita
+                            distracciones.</p>
                     </div>
-                    <a href="salas.html"
-                        style="margin-top: 15px; text-decoration: none; color: #38bdf8; font-weight: bold;">Ver salas
-                        disponibles ➔</a>
+                    <a href="salas.html" data-i18n="card1_link"
+                        style="margin-top: 15px; text-decoration: none; color: #38bdf8; font-weight: bold;">
+                        Ver salas disponibles ➔
+                    </a>
                 </article>
 
                 <article class="mini-card"
                     style="border-left: 4px solid #818cf8; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <h3>📚 Mis Cursos</h3>
-                        <p>Revisa tu horario de hoy y organiza los temas que necesitas repasar.</p>
+                        <h3><i class="fa-solid fa-book" style="color: #818cf8;"></i> <span data-i18n="card2_titulo">Mis
+                                Cursos</span></h3>
+                        <p data-i18n="card2_texto">Revisa tu horario de hoy y organiza los temas que necesitas repasar.
+                        </p>
                     </div>
-                    <a href="cursos.html"
-                        style="margin-top: 15px; text-decoration: none; color: #818cf8; font-weight: bold;">Ir a mis
-                        cursos ➔</a>
+                    <a href="cursos.html" data-i18n="card2_link"
+                        style="margin-top: 15px; text-decoration: none; color: #818cf8; font-weight: bold;">
+                        Ir a mis cursos ➔
+                    </a>
                 </article>
 
                 <article class="mini-card"
                     style="border-left: 4px solid #4ade80; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <h3>🍅 Técnicas de Estudio</h3>
-                        <p>Aplica Pomodoro o Active Recall para maximizar tu retención de información.</p>
+                        <h3><i class="fa-solid fa-stopwatch" style="color: #4ade80;"></i> <span
+                                data-i18n="card3_titulo">Técnicas de Estudio</span></h3>
+                        <p data-i18n="card3_texto">Aplica Pomodoro o Active Recall para maximizar tu retención de
+                            información.</p>
                     </div>
-                    <a href="metodos.html"
-                        style="margin-top: 15px; text-decoration: none; color: #4ade80; font-weight: bold;">Elegir un
-                        método ➔</a>
+                    <a href="metodos.html" data-i18n="card3_link"
+                        style="margin-top: 15px; text-decoration: none; color: #4ade80; font-weight: bold;">
+                        Elegir un método ➔
+                    </a>
                 </article>
 
                 <article class="mini-card"
                     style="border-left: 4px solid #f472b6; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <h3>🌌 Ambientes Solo</h3>
-                        <p>Si prefieres estudiar solo, elige un fondo relajante y música lo-fi.</p>
+                        <h3><i class="fa-solid fa-moon" style="color: #f472b6;"></i> <span
+                                data-i18n="card4_titulo">Ambientes Solo</span></h3>
+                        <p data-i18n="card4_texto">Si prefieres estudiar solo, elige un fondo relajante y música lo-fi.
+                        </p>
                     </div>
-                    <a href="ambientes.html"
-                        style="margin-top: 15px; text-decoration: none; color: #f472b6; font-weight: bold;">Explorar
-                        ambientes ➔</a>
+                    <a href="ambientes.html" data-i18n="card4_link"
+                        style="margin-top: 15px; text-decoration: none; color: #f472b6; font-weight: bold;">
+                        Explorar ambientes ➔
+                    </a>
                 </article>
             </div>
 
             <div class="bloque">
-                <h2>Mi Rendimiento Semanal</h2>
+                <h2 data-i18n="rendimiento_titulo">Mi Rendimiento Semanal</h2>
                 <div class="grid">
                     <article class="mini-card">
                         <h3 style="color: #38bdf8; font-size: 32px; margin-bottom: 5px;">14h 30m</h3>
-                        <p>Horas de concentración</p>
+                        <p data-i18n="horas_concentracion">Horas de concentración</p>
                     </article>
 
                     <article class="mini-card">
-                        <h3 style="color: #4ade80; font-size: 32px; margin-bottom: 5px;">5 Días</h3>
-                        <p>Racha de estudio 🔥</p>
+                        <h3 id="racha-dias" style="color: #4ade80; font-size: 32px; margin-bottom: 5px;">1 Día</h3>
+                        <p data-i18n="racha_label">Racha de estudio 🔥</p>
                     </article>
                 </div>
             </div>
 
             <div class="bloque">
-                <h2>Salas populares ahora</h2>
+                <h2 data-i18n="salas_populares">Salas populares ahora</h2>
                 <div class="grid">
                     <article class="mini-card">
                         <h3>💻 Programming Room</h3>
-                        <p>18 estudiantes conectados.</p>
+                        <p data-i18n="sala1_desc">18 estudiantes conectados.</p>
                     </article>
 
                     <article class="mini-card">
                         <h3>📖 Silent Library</h3>
-                        <p>12 estudiantes estudiando.</p>
+                        <p data-i18n="sala2_desc">12 estudiantes estudiando.</p>
                     </article>
 
                     <article class="mini-card">
                         <h3>🌧️ Rain Study</h3>
-                        <p>24 estudiantes concentrándose.</p>
+                        <p data-i18n="sala3_desc">24 estudiantes concentrándose.</p>
                     </article>
 
                     <article class="mini-card">
                         <h3>🌌 Night Focus</h3>
-                        <p>9 estudiantes activos.</p>
+                        <p data-i18n="sala4_desc">9 estudiantes activos.</p>
                     </article>
                 </div>
             </div>
@@ -135,47 +180,52 @@
         <aside>
 
             <div class="panel">
-                <h2>Progreso diario</h2>
+                <h2 data-i18n="progreso_diario">Progreso diario</h2>
                 <div class="barra">
                     <div id="barra-progreso" class="progreso" style="width: 0%; transition: width 0.4s ease;"></div>
                 </div>
-                <p id="texto-progreso">0 de 0 tareas completadas</p>
+                <p id="texto-progreso" style="text-align: right; font-size: 14px; margin-top: 8px;">0 de 0 tareas
+                    completadas</p>
             </div>
 
             <div class="panel">
-                <h2>Tareas del día</h2>
+                <h2 data-i18n="tareas_dia">Tareas del día</h2>
 
                 <form id="form-tarea" style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <input type="text" id="nueva-tarea" placeholder="Escribe una tarea..." required
+                    <input type="text" id="nueva-tarea" data-i18n="tarea_placeholder" placeholder="Escribe una tarea..."
+                        required
                         style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
                     <button type="submit" style="padding: 10px 15px; border-radius: 8px;">+</button>
                 </form>
 
                 <ul class="tareas" id="lista-tareas">
+                    <!-- Dinámico vía JS -->
                 </ul>
             </div>
 
             <div class="panel">
                 <h2 id="titulo-horario-hoy">Mi Horario</h2>
-                <div id="horario-hoy-contenedor" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                    </div>
+                <div id="horario-hoy-contenedor"
+                    style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    <!-- Dinámico vía JS -->
+                </div>
             </div>
 
             <div class="panel">
-                <h2>Estado</h2>
+                <h2 data-i18n="estado_titulo">Estado</h2>
 
-                <div class="estado-item activo">
+                <div class="estado-item activo" data-i18n="estado_activo">
                     🔥 En concentración
                 </div>
 
-                <div class="estado-item musica">
+                <div class="estado-item musica" data-i18n="estado_musica">
                     🎧 Lo-fi activo
                 </div>
             </div>
 
             <div class="panel">
-                <h2>Motivación</h2>
-                <p>"La disciplina supera a la motivación."</p>
+                <h2 data-i18n="motivacion_titulo">Motivación</h2>
+                <p id="frase-motivacion" style="font-style: italic;">"La disciplina supera a la motivación."</p>
             </div>
 
         </aside>
@@ -184,16 +234,20 @@
 
     <footer>
         <div class="sobre">
-            <h2>Sobre FocusWave</h2>
-            <p>
+            <h2 data-i18n="sobre_titulo">Sobre FocusWave</h2>
+            <p data-i18n="sobre_texto">
                 FocusWave es una plataforma diseñada para mejorar la concentración y productividad
                 de los estudiantes mediante ambientes virtuales y herramientas académicas.
             </p>
         </div>
-        <p>FocusWave © 2025</p>
+        <p>FocusWave © 2026</p>
     </footer>
+
+    <!-- SCRIPTS -->
     <script src="js/modo-claro.js"></script>
+    <script src="js/idioma.js"></script>
     <script src="js/inicio.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/auth.js"></script>
 </body>
 

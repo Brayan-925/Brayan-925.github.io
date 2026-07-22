@@ -12,18 +12,6 @@
     --nav-bg: rgba(30, 41, 59, 0.8);
 }
 
-/* Variables cuando se activa el Modo Claro */
-body.light-mode {
-    --bg-principal: linear-gradient(135deg, #f1f5f9, #e2e8f0, #cbd5e1);
-    --bg-tarjetas: rgba(255, 255, 255, 0.9);
-    --border-tarjetas: rgba(0, 0, 0, 0.1);
-    --texto-principal: #0f172a;
-    --texto-secundario: #334155;
-    --bg-inputs: #ffffff;
-    --border-inputs: #cbd5e1;
-    --nav-bg: rgba(241, 245, 249, 0.8);
-}
-
 /* Cambiar las propiedades fijas de estilo.css por las variables */
 body {
     background: var(--bg-principal) !important;
@@ -129,34 +117,6 @@ nav{
     border-bottom: 1px solid rgba(255,255,255,0.1);
 
     box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
-}
-
-.buscador{
-    margin: 20px auto;
-    max-width: 400px;
-}
-
-.buscador input{
-    width: 100%;
-    padding: 12px;
-
-    border-radius: 10px;
-
-    border: 1px solid #334155;
-
-    background-color: #0f172a;
-
-    color: white;
-}
-
-nav ul{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 20px;
-
-    list-style: none;
 }
 
 nav a{
@@ -380,32 +340,6 @@ aside{
     color: #e2e8f0;
 }
 
-/* HORARIO */
-
-.horario-item{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    margin-bottom: 15px;
-
-    padding: 12px;
-
-    background-color: rgba(255,255,255,0.04);
-
-    border-radius: 10px;
-}
-
-.horario-item span{
-    background: linear-gradient(to right, #38bdf8, #818cf8);
-
-    padding: 6px 10px;
-
-    border-radius: 8px;
-
-    font-size: 14px;
-    font-weight: bold;
-}
 /* ESTADO */
 
 .estado-item{
@@ -445,16 +379,6 @@ aside{
     margin-bottom: 22px;
 
     box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
-}
-
-#temporizador{
-    text-align: center;
-
-    font-size: 50px;
-
-    margin: 20px 0;
-
-    color: #38bdf8;
 }
 
 aside button{
@@ -520,8 +444,7 @@ aside li{
     transition: 0.3s;
 }
 
-.formulario input:focus,
-.buscador input:focus{
+.formulario input:focus{
     outline: none;
 
     border-color: #38bdf8;
@@ -556,6 +479,21 @@ footer{
     margin-bottom: 20px;
 }
 
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mini-card {
+    animation: aparecer 0.5s ease forwards;
+    opacity: 0;
+}
 /* RESPONSIVE */
 @media(max-width: 768px){
 
@@ -566,11 +504,6 @@ footer{
 
     .grid{
         grid-template-columns: 1fr;
-    }
-
-    nav ul{
-        flex-wrap: wrap;
-        gap: 10px;
     }
 
     .logo h1{

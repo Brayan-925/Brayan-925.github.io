@@ -118,7 +118,10 @@ if (metodoGuardado) {
             const curso = document.getElementById("nuevo-curso").value;
             const pregunta = document.getElementById("nueva-pregunta").value;
             const respuesta = document.getElementById("nueva-respuesta").value;
-
+            if (pregunta === "" || respuesta === "") {
+                alert("Escribe tanto la pregunta como la respuesta.");
+                return;
+            }
             todasLasFlashcards.push({ curso, pregunta, respuesta });
             localStorage.setItem("misFlashcards", JSON.stringify(todasLasFlashcards));
 
