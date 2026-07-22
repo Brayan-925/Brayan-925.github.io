@@ -1,0 +1,282 @@
+/* ==========================================================
+   MÉTODO ACTIVO - Estilos específicos
+   ========================================================== */
+
+/* TEMPORIZADOR */
+.temporizador-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+.barra-progreso-circular {
+    width: 220px;
+    height: 220px;
+    position: relative;
+}
+
+.barra-progreso-circular svg {
+    transform: rotate(-90deg);
+}
+
+.barra-progreso-circular circle {
+    fill: none;
+    stroke-width: 8;
+    cx: 110;
+    cy: 110;
+    r: 95;
+}
+
+.barra-fondo {
+    stroke: rgba(255,255,255,0.08);
+}
+
+.barra-porcentaje {
+    stroke: #38bdf8;
+    stroke-linecap: round;
+    stroke-dasharray: 596.9;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+#tiempo-pantalla {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+.controles-temporizador {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.controles-temporizador button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+#btn-iniciar {
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    color: white;
+}
+
+#btn-pausar {
+    background: #334155;
+    color: white;
+}
+
+#btn-reiniciar {
+    background: #334155;
+    color: white;
+}
+
+#contador-ciclos {
+    font-size: 14px;
+    color: #94a3b8;
+    text-align: center;
+}
+
+/* NOTIFICACIÓN VISUAL */
+.notificacion-cambio {
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 16px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: top 0.5s ease;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+}
+
+.notificacion-cambio.mostrar {
+    top: 25px;
+}
+
+.notificacion-cambio.enfoque {
+    background: #1e3a5f;
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+}
+
+.notificacion-cambio.descanso {
+    background: #3d2e1c;
+    border: 1px solid #fb923c;
+    color: #fb923c;
+}
+
+/* FLASHCARDS - Animación 3D */
+.flashcard-contenedor {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.flashcard-inner.volteada {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 220px;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.flashcard-front {
+    background: rgba(30,41,59,0.85);
+    border: 2px dashed #38bdf8;
+    color: #e2e8f0;
+}
+
+.flashcard-back {
+    background: rgba(30,41,59,0.85);
+    border: 2px solid #4ade80;
+    color: #4ade80;
+    transform: rotateY(180deg);
+}
+
+#texto-tarjeta {
+    font-size: 20px;
+    margin: 0;
+}
+
+.flashcard-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.flashcard-acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.flashcard-acciones button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 13px;
+}
+
+#btn-editar {
+    background: #f59e0b;
+    color: white;
+}
+
+#btn-eliminar-tarjeta {
+    background: #ef4444;
+    color: white;
+}
+
+/* MODO CLARO - Ajustes */
+body.modo-claro .barra-fondo {
+    stroke: rgba(0,0,0,0.08);
+}
+
+body.modo-claro .barra-porcentaje {
+    stroke: #0284c7;
+}
+
+body.modo-claro #tiempo-pantalla {
+    color: #0f172a;
+}
+
+body.modo-claro #btn-reiniciar {
+    background: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro #contador-ciclos {
+    color: #64748b;
+}
+
+body.modo-claro .flashcard-front {
+    background: rgba(255,255,255,0.92) !important;
+    color: #0f172a !important;
+}
+
+body.modo-claro .flashcard-back {
+    background: rgba(255,255,255,0.92) !important;
+    color: #16a34a !important;
+}
+
+body.modo-claro .flashcard-info {
+    color: #64748b;
+}
+
+body.modo-claro .notificacion-cambio.enfoque {
+    background: #e0f2fe;
+    border: 1px solid #0284c7;
+    color: #0284c7;
+}
+
+body.modo-claro .notificacion-cambio.descanso {
+    background: #fff7ed;
+    border: 1px solid #ea580c;
+    color: #ea580c;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    .barra-progreso-circular {
+        width: 180px;
+        height: 180px;
+    }
+
+    #tiempo-pantalla {
+        font-size: 36px;
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+        padding: 25px 20px;
+        min-height: 180px;
+    }
+}
+

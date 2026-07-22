@@ -7,6 +7,7 @@
     <title>Área de Enfoque | FocusWave</title>
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/modo-claro.css">
+    <link rel="stylesheet" href="css/metodo-activo.css">
     <link rel="icon" href="img/icono.png">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -44,20 +45,32 @@
         <p id="instrucciones-metodo"
             style="color: #cbd5e1; max-width: 600px; text-align: center; margin-bottom: 30px; line-height: 1.6;"></p>
 
+        <!-- INTERFAZ TEMPORIZADOR -->
         <div id="interfaz-reloj" class="panel"
-            style="display: none; text-align: center; width: 100%; max-width: 500px; background: rgba(15,23,42,0.8);">
+            style="display: none; width: 100%; max-width: 500px; background: rgba(15,23,42,0.8); padding: 30px;">
 
-            <h2 id="fase-actual" style="color: #4ade80; font-size: 24px; margin-bottom: -10px;">Fase: </h2>
-            <div id="tiempo-pantalla" style="font-size: 80px; font-weight: bold; color: #e2e8f0; margin: 20px 0;">00:00
-            </div>
+            <h2 id="fase-actual" style="color: #38bdf8; font-size: 22px; margin-bottom: 20px; text-align: center;">Fase: Enfoque 🔥</h2>
 
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button id="btn-iniciar" style="padding: 15px 30px; font-size: 18px;">Iniciar</button>
-                <button id="btn-pausar"
-                    style="padding: 15px 30px; font-size: 18px; background: #334155;">Pausar</button>
+            <div class="temporizador-contenedor">
+                <div class="barra-progreso-circular">
+                    <svg viewBox="0 0 220 220">
+                        <circle class="barra-fondo" cx="110" cy="110" r="95" />
+                        <circle id="circulo-progreso" class="barra-porcentaje" cx="110" cy="110" r="95" stroke-dashoffset="0" />
+                    </svg>
+                    <div id="tiempo-pantalla">25:00</div>
+                </div>
+
+                <div class="controles-temporizador">
+                    <button id="btn-iniciar">▶ Iniciar</button>
+                    <button id="btn-pausar">⏸ Pausar</button>
+                    <button id="btn-reiniciar">↺ Reiniciar</button>
+                </div>
+
+                <p id="contador-ciclos">Ciclo #0 completados</p>
             </div>
         </div>
 
+        <!-- INTERFAZ FLASHCARDS -->
         <div id="interfaz-flashcards" style="display: none; width: 100%; max-width: 600px; text-align: center;">
 
             <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -65,28 +78,38 @@
                 <select id="filtro-curso"
                     style="padding: 8px; border-radius: 5px; background: #1e293b; color: white; border: 1px solid #38bdf8;">
                     <option value="Todos">Todos los cursos</option>
-                    <option value="Java">Programación Orientada a Objetos</option>
-                    <option value="Cálculo">Cálculo Integral</option>
-                    <option value="Física">Física</option>
                 </select>
             </div>
 
-            <div id="tarjeta" class="card"
-                style="padding: 50px 40px; cursor: pointer; min-height: 200px; display: flex; align-items: center; justify-content: center; transition: 0.3s; border: 2px dashed #38bdf8; margin-bottom: 20px;">
-                <h3 id="texto-tarjeta" style="font-size: 22px;">Cargando tarjeta...</h3>
+            <div class="flashcard-info">
+                <span id="contador-tarjetas">Tarjeta 0 de 0</span>
+                <span id="pista-volteo" style="color: #94a3b8; font-size: 13px;">💡 Haz clic en la tarjeta</span>
             </div>
 
-            <button id="btn-siguiente" style="padding: 12px 25px; margin-bottom: 30px;">Siguiente Tarjeta ➔</button>
+            <div class="flashcard-contenedor">
+                <div id="flashcard-inner" class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3 id="texto-tarjeta" style="font-size: 20px; margin: 0;">Cargando tarjeta...</h3>
+                    </div>
+                    <div class="flashcard-back">
+                        <h3 id="respuesta-tarjeta" style="font-size: 20px; margin: 0;"></h3>
+                    </div>
+                </div>
+            </div>
 
-            <div class="panel" style="text-align: left; background: rgba(15,23,42,0.6);">
+            <div class="flashcard-acciones">
+                <button id="btn-anterior">◀ Anterior</button>
+                <button id="btn-siguiente">Siguiente ▶</button>
+                <button id="btn-editar">✏️ Editar</button>
+                <button id="btn-eliminar-tarjeta">🗑️ Eliminar</button>
+            </div>
+
+            <div class="panel" style="text-align: left; background: rgba(15,23,42,0.6); margin-top: 30px;">
                 <h3 style="margin-bottom: 15px; font-size: 18px;">Añadir nueva tarjeta</h3>
                 <form id="form-flashcard" style="display: flex; flex-direction: column; gap: 10px;">
                     <select id="nuevo-curso" required
                         style="padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
                         <option value="" disabled selected>Selecciona el curso...</option>
-                        <option value="Java">Programación Orientada a Objetos</option>
-                        <option value="Cálculo">Cálculo Integral</option>
-                        <option value="Física">Física</option>
                     </select>
                     <input type="text" id="nueva-pregunta" placeholder="Pregunta (Ej: ¿Regla de Leibniz?)" required
                         style="padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: white;">
@@ -99,6 +122,10 @@
         </div>
 
     </main>
+
+    <!-- Notificación visual oculta -->
+    <div id="notificacion-fase" class="notificacion-cambio"></div>
+
     <script src="js/menu.js"></script>
     <script src="js/modo-claro.js"></script>
     <script src="js/metodo-activo.js"></script>

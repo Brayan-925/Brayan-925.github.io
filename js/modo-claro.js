@@ -28,6 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     actualizarIcono();
 
+    // Función para actualizar el reproductor de Spotify según el tema
+    function actualizarSpotifyTheme(){
+        const spotifyIframe = document.getElementById("spotify-player");
+        if(spotifyIframe){
+            const srcActual = spotifyIframe.src;
+            const esClaro = document.body.classList.contains("modo-claro");
+            if(esClaro && srcActual.includes("theme=0")){
+                spotifyIframe.src = srcActual.replace("theme=0", "theme=1");
+            } else if(!esClaro && srcActual.includes("theme=1")){
+                spotifyIframe.src = srcActual.replace("theme=1", "theme=0");
+            }
+        }
+    }
+
     // Evento de click para alternar el tema
     boton.addEventListener("click", () => {
         document.body.classList.toggle("modo-claro");
@@ -37,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("focuswave-tema", temaActual);
 
         actualizarIcono();
+        actualizarSpotifyTheme();
     });
 
 });

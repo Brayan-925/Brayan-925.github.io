@@ -8,8 +8,13 @@ for (let i = 0; i < botonesMetodos.length; i++) {
         
         // Lo guardamos en la memoria
         localStorage.setItem('metodoSeleccionado', tituloMetodo);
-        
-        // Saltamos a la nueva página de trabajo
-        window.location.href = "metodo-activo.html";
+
+        // La Matriz de Eisenhower tiene su propia página
+        if (tituloMetodo.includes("Eisenhower")) {
+            window.location.href = "eisenhower.html";
+        } else {
+            // Saltamos a la página de trabajo
+            window.location.href = "metodo-activo.html";
+        }
     });
 }
